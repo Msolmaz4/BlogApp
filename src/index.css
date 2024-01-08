@@ -4,8 +4,11 @@
 
 
 .navbar{
-    @apply   bg-sky-500 text-white h-24;
+    @apply   bg-sky-500 text-white h-24 flex justify-between items-center  dark:bg-slate-700;
+}
+.navbar_logo{
+    @apply    ml-7  dark:bg-white dark:text-black;
 }
 .navbar_right{
-    @apply  flex justify-end gap-5 mr-9
+   @apply flex  gap-7 mr-7 dark:bg-white dark:text-black
 }

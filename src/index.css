@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.navbar{
+    @apply   bg-sky-500 text-white h-24;
+}
+.navbar_right{
+    @apply  flex justify-end gap-5 mr-9
+}

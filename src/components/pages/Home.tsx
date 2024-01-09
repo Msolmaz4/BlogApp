@@ -1,11 +1,10 @@
 import Navbar from "../Navbar/Navbar"
 import { useState } from "react";
-import { useGetAllBlogsQuery } from "../../redux/blogs";
+
 
 const Home = () => {
     const [theme, setTheme] = useState<string>("light")
-    const{data} = useGetAllBlogsQuery("");
-    console.log(data)
+    
 
     const darkTheme = () => {
       setTheme(theme === "light" ? "dark" : "light");

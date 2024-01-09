@@ -9,7 +9,7 @@ const useRouten = () => {
 
 const routes = [
     {
-   path:"/",
+      path:"/",
       element:<Home/>
     },
     {

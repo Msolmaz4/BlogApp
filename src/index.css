@@ -12,3 +12,5 @@
 .navbar_right{
    @apply flex  gap-7 mr-7 dark:bg-white dark:text-black
 }
+
+

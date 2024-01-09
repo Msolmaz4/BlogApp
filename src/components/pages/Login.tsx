@@ -1,70 +1,23 @@
+
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Register = () => {
-    const navigate = useNavigate()
+const Login = () => {
+  const navigate = useNavigate()
   const [isPasswordHidden, setPasswordHidden] = useState(true);
 
   return (
-    <div className="flex flex-col justify-center items-center mt-16 gap-6" >
-        <div> 
-      <label className="text-gray-600">UserName</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter UserName *"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
-<div> 
-      <label className="text-gray-600">First Name</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter First Name *"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
-      <div> 
-      <label className="text-gray-600">Last Name</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter Last Name"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div><div>
+    <div className="flex flex-col justify-center items-center mt-48" >
       <label className="text-gray-600">Email</label>
       <div className="relative max-w-xs mt-2">
     
         <input
           type="text"
-          placeholder="Enter Email*"
+          placeholder="Enter Email"
           className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
         />
-      </div></div><div>
-      <label className="text-gray-600">Image</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Image"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
-      <div> 
-      <label className="text-gray-600">Bio</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter Bio"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
+      </div>
 
       <div>
         <label className="text-gray-600">Password</label>
@@ -125,6 +78,6 @@ const Register = () => {
 </button>
     </div>
   );
-};
+}
 
-export default Register;
+export default Login

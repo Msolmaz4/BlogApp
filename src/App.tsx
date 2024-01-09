@@ -1,31 +1,9 @@
-import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar/Navbar";
+import { useRoutes } from "react-router-dom";
+import useRouten from "./hook/useRouten";
 
 function App() {
-  
-  const [theme ,setTheme] = useState("light")
- 
-  const darkTheme = ()=>{
-    setTheme(theme === "light" ? "dark" :"light")
-    if(theme === "dark"){
-      document.documentElement.classList.add("dark")
-    }
-      else{
-        document.documentElement.classList.remove("dark")
-      }
-  }
-
-
-  return (
-    <div className=" h-screen bg-slate-300   dark:bg-slate-700 dark:text-black" >
-      <Navbar  darkTheme= {darkTheme} theme={theme} />
-      <div className=" dark:bg-slate-700 dark:text-black">
-     hallo   
-      </div>
-    
-
-    </div>
-  );
+  const { routes } = useRouten();
+  return useRoutes(routes);
 }
 
 export default App;

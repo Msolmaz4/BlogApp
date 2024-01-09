@@ -1,6 +1,9 @@
+interface In {
+  darkTheme():string,
+  theme:string,
+}
 
-
-const Navbar = ({darkTheme,theme}) => {
+const Navbar = ({darkTheme,theme}:In) => {
 
   return (
     <div  className="navbar">

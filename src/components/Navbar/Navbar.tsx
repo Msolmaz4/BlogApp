@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import { MdDarkMode } from "react-icons/md";
 import { CiDark } from "react-icons/ci";
 import { useState } from "react";
+import { useLogoutMutation } from "../../redux/auth";
 
 interface In {
   darkTheme(): string;
@@ -9,22 +10,34 @@ interface In {
 }
 
 const pers = [
-  {
-    name: "login",
-    url: "/login",
-  },
-  {
-    name: "register",
-    url: "/register",
+ {
+    name: "My Blog",
+    url: "/myblog",
   },
   {
     name: "about",
     url: "/about",
   },
+ 
+  {
+    name:"logout",
+    
+  }
 ];
 
 const Navbar = ({ darkTheme, theme }: In) => {
   const [open, setOpen] = useState<boolean>(false);
+  const authToken = localStorage.getItem("authToken");
+  console.log(authToken, "navbaraaaaaa");
+  const [logout] =useLogoutMutation()
+const hand3 = (name)=>{
+ console.log(name)
+ if(name == "logout"){
+  localStorage.clear()
+  logout(authToken)
+ }
+}
+
 
   return (
     <div className="navbar">
@@ -53,10 +66,10 @@ const Navbar = ({ darkTheme, theme }: In) => {
               alt="Current profile photo"
             />{" "}
           </button>
-          {open ? (
+          { authToken && open ? (
             <div>
               {pers?.map((item) => (
-                <NavLink
+                <NavLink  onClick={()=>hand3(item.name)}
                   key={item.name}
                   to={item.url}
                   className="block px-4 py-2 text-sm text-white"
@@ -65,7 +78,14 @@ const Navbar = ({ darkTheme, theme }: In) => {
                 </NavLink>
               ))}
             </div>
-          ) : null}
+          ) : ""}
+          { !authToken && open ? (
+            <div>
+<NavLink to='/login'>login</NavLink>
+
+            </div>
+          ) : ""}
+
         </div>
 
         <div>

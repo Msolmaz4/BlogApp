@@ -37,7 +37,27 @@ export const logApi = createApi({
  
 });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
+
 export const { useLogMutation } = logApi
+
+
+
+
+export const logoutApi = createApi({
+  reducerPath: 'logoutApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  endpoints: (builder) => ({
+    logout: builder.mutation({ //cagiriken burfdaki isim olacak dikkat et
+      query: (data) => ({
+        url: 'auth/logout', // burdq gidecek yier 
+        method: 'GET',
+        body: data,
+      }),
+    }),
+  }),
+ 
+});
+
+
+export const { useLogoutMutation} = logoutApi
 

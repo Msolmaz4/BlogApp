@@ -4,6 +4,8 @@ import { MdOutlineComment } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("");
@@ -11,24 +13,35 @@ const HomeCarts = () => {
   const [veri, setVeri] = useState([]);
   const [page, SetPge] = useState<number>(1);
   const [kalp, setKalp] = useState(true);
-
-  const authToken =localStorage.getItem("authToken")
-    console.log(authToken,"jomecart")
-    const userData = JSON.parse(localStorage.getItem("userData"))
-    console.log(userData,"homecart")
+  const navigate = useNavigate()
+  const authToken = localStorage.getItem("authToken");
+  console.log(authToken, "jomecart");
+  const userData = JSON.parse(localStorage.getItem("userData"));
+  console.log(userData, "homecart");
   useEffect(() => {
     if (data?.data.length > 8) {
       console.log("first");
       setVeri(data?.data.slice(0, 8));
+      
     }
   }, [data, page]);
+
+  const hanglr = (id:string)=>{
+   console.log(id)
+    if(!authToken){
+      toast("du must login")
+    }
+    else{
+   navigate(`details/${id}`)
+    }
+  }
   return (
     <section>
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-slate-900">
-            {  userData ? ( `kullanici ismi : ${userData.firstName}`) :"" }
-             </h2>
+            {userData ? `kullanici ismi : ${userData.firstName}` : ""}
+          </h2>
         </div>
         <form className="group relative">
           <svg
@@ -56,7 +69,7 @@ const HomeCarts = () => {
         {isLoading
           ? "loading......"
           : veri?.map((item, index) => (
-              <div
+              <div onClick={()=>console.log(item._id)}
                 key={index}
                 className="bg-white p-4 rounded-md shadow-md h-[200px] w-[550px] ml-8 hover:bg-blue-200 flex "
               >
@@ -83,17 +96,17 @@ const HomeCarts = () => {
                   <div className="mt-6 gap-2 justify-between flex">
                     <div className="flex gap-4 ">
                       {kalp ? (
-                        <FaHeart className="" size={24} />
+                        <FaHeart className="" size={24}  onClick={()=> hanglr(item._id)}/>
                       ) : (
-                        <CiHeart size={24} />
+                        <CiHeart size={24} onClick={()=> hanglr(item._id)} />
                       )}
 
-                      <FaEye size={24} />
-                      <MdOutlineComment size={24} />
+                      <FaEye size={24} onClick={()=> hanglr(item._id)} />
+                      <MdOutlineComment size={24}  onClick={()=> hanglr(item._id)}/>
                     </div>
                     <div>
-                      <button className="cta w-36 h-8 mt-[-7px]">
-                        <span className="span">NEXT</span>
+                      <button className="cta w-36 h-8 mt-[-7px]" onClick={()=> hanglr(item._id)}>
+                        <span className="span">Read </span>
                         <span className="second">
                           <svg
                             width="40px"

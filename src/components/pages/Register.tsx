@@ -1,18 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../redux/auth";
-
+import {  toast } from 'react-toastify';
 
 
 const Register = () => {
   const navigate = useNavigate();
-   const [register] = useRegisterMutation()
-
+   const [register] = useRegisterMutation()//neden boyle yaptik hocam 
+  
   const [isPasswordHidden, setPasswordHidden] = useState(true);
   const [inp,setInp] =useState({
     username:"",
-    firstname:"",
-    lastname:"",
+    firstName:"",
+    lastName:"",
     email:"",
     image:"",
     bio:"",
@@ -21,7 +21,33 @@ const Register = () => {
   })
     const handle = async()=>{
 console.log(inp)
-register(inp)
+try {
+  const result = await register(inp)
+  console.log(result)
+  if(result?.error?.data.error === true){
+    toast(result.error.data.message);
+  }
+else{
+  toast("sucess!!!!!!!!!!")
+  setInp({
+    username:"",
+    firstName:"",
+    lastName:"",
+    email:"",
+    image:"",
+    bio:"",
+    password:""
+
+  })
+  navigate('/login')
+} 
+
+} catch (error) {
+  console.log(error)
+}
+
+
+
 
     }
   return (
@@ -44,8 +70,8 @@ register(inp)
         <div className="relative max-w-xs mt-2">
           <input
             type="text"
-            name="firstname"
-            value={inp.firstname}
+            name="firstName"
+            value={inp.firstName}
             onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
             placeholder="Enter First Name *"
             className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
@@ -58,8 +84,8 @@ register(inp)
           <input
             type="text"
             placeholder="Enter Last Name"
-            name="lastname"
-            value={inp.lastname}
+            name="lastName"
+            value={inp.lastName}
             onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
             className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />

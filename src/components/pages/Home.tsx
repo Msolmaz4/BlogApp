@@ -3,6 +3,7 @@ import { useState } from "react";
 import HomeCarts from "./HomeCarts";
 
 
+
 const Home = () => {
     const [theme, setTheme] = useState<string>("light")
     
@@ -21,7 +22,7 @@ const Home = () => {
     <div className=" h-screen bg-slate-300   dark:bg-slate-700 dark:text-black">
       <Navbar darkTheme={darkTheme} theme={theme} />
       <div className=" dark:bg-slate-700 dark:text-black">
-        <HomeCarts/>
+        <HomeCarts />
       </div>
     </div>
   )

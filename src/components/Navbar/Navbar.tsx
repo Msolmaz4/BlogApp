@@ -31,7 +31,7 @@ const Navbar = ({ darkTheme, theme }: In) => {
       <div className="navbar_logo">Navbar</div>
 
       <div className="navbar_right">
-        <div>isim</div>
+        <div></div>
 
         <NavLink
           to={"/"}

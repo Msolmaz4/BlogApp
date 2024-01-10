@@ -6,9 +6,9 @@ export const authApi = createApi({
     reducerPath: 'authApi',
     baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
     endpoints: (builder) => ({
-      register: builder.mutation({
+      register: builder.mutation({ //cagiriken burfdaki isim olacak dikkat et
         query: (data) => ({
-          url: 'users', // Gerekirse adresi düzenleyin
+          url: 'users', // burdq gidecek yier 
           method: 'POST',
           body: data,
         }),
@@ -19,3 +19,25 @@ export const authApi = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const {useRegisterMutation   } = authApi
+
+
+
+export const logApi = createApi({
+  reducerPath: 'logApi',
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  endpoints: (builder) => ({
+    log: builder.mutation({ //cagiriken burfdaki isim olacak dikkat et
+      query: (data) => ({
+        url: 'auth/login', // burdq gidecek yier 
+        method: 'POST',
+        body: data,
+      }),
+    }),
+  }),
+ 
+});
+
+// Export hooks for usage in functional components, which are
+// auto-generated based on the defined endpoints
+export const { useLogMutation } = logApi
+

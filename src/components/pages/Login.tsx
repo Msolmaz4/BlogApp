@@ -1,20 +1,46 @@
-
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLogMutation } from "../../redux/auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isPasswordHidden, setPasswordHidden] = useState(true);
+  const [log] = useLogMutation();
+  const [int, setInt] = useState({
+    username: "",
+    password: "",
+  });
 
+  const handle1 = async () => {
+    try {
+      const rest = await log(int);
+
+      console.log(rest);
+      const token = rest?.data.token;
+      const user = rest?.data.user;
+      if (rest?.error?.data.error === true) {
+        toast(rest?.error.data.message);
+      } else {
+        toast("success");
+        navigate("/");
+        localStorage.setItem("authToken", token);
+        localStorage.setItem("userData", JSON.stringify(user));
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="flex flex-col justify-center items-center mt-48" >
-      <label className="text-gray-600">Email</label>
+    <div className="flex flex-col justify-center items-center mt-48">
+      <label className="text-gray-600">UserName</label>
       <div className="relative max-w-xs mt-2">
-    
         <input
           type="text"
-          placeholder="Enter Email"
+          placeholder="username"
+          name="username"
+          value={int.username}
+          onChange={(e) => setInt({ ...int, [e.target.name]: e.target.value })}
           className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
         />
       </div>
@@ -65,19 +91,28 @@ const Login = () => {
           </button>
           <input
             type={isPasswordHidden ? "password" : "text"}
+            name="password"
+            value={int.password}
+            onChange={(e) =>
+              setInt({ ...int, [e.target.name]: e.target.value })
+            }
             placeholder="Enter your password"
             className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
       </div>
-   <p className="mt-3">Don't have an account?  <button onClick={()=>navigate('/register')}>Sign Up</button></p>
+      <p className="mt-3">
+        Don't have an account?{" "}
+        <button onClick={() => navigate("/register")}>Sign Up</button>
+      </p>
       <button
-    className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6"
->
-    Button
-</button>
+        onClick={handle1}
+        className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6"
+      >
+        Button
+      </button>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

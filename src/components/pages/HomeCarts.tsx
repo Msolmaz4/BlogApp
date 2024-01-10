@@ -11,6 +11,11 @@ const HomeCarts = () => {
   const [veri, setVeri] = useState([]);
   const [page, SetPge] = useState<number>(1);
   const [kalp, setKalp] = useState(true);
+
+  const authToken =localStorage.getItem("authToken")
+    console.log(authToken,"jomecart")
+    const userData = JSON.parse(localStorage.getItem("userData"))
+    console.log(userData,"homecart")
   useEffect(() => {
     if (data?.data.length > 8) {
       console.log("first");
@@ -21,7 +26,9 @@ const HomeCarts = () => {
     <section>
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-slate-900"> kullanici ismi</h2>
+          <h2 className="font-semibold text-slate-900">
+            {  userData ? ( `kullanici ismi : ${userData.firstName}`) :"" }
+             </h2>
         </div>
         <form className="group relative">
           <svg

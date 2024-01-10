@@ -1,15 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { blogsApi } from './blogs' 
-import { authApi } from './auth'
+import { authApi, logApi } from './auth'
 
 export const store = configureStore({
   reducer: {
     [blogsApi.reducerPath]: blogsApi.reducer,
+    [logApi.reducerPath]: logApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(blogsApi.middleware).concat(authApi.middleware),
+  getDefaultMiddleware().concat(blogsApi.middleware).concat(authApi.middleware).concat(logApi.middleware),
 })
 
 

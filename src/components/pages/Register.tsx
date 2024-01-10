@@ -1,76 +1,109 @@
-
-
-
-
-
-
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useRegisterMutation } from "../../redux/auth";
+
+
 
 const Register = () => {
-    const navigate = useNavigate()
-  const [isPasswordHidden, setPasswordHidden] = useState(true);
+  const navigate = useNavigate();
+   const [register] = useRegisterMutation()
 
+  const [isPasswordHidden, setPasswordHidden] = useState(true);
+  const [inp,setInp] =useState({
+    username:"",
+    firstname:"",
+    lastname:"",
+    email:"",
+    image:"",
+    bio:"",
+    password:""
+
+  })
+    const handle = async()=>{
+console.log(inp)
+register(inp)
+
+    }
   return (
-    <div className="flex flex-col justify-center items-center mt-16 gap-6" >
-        <div> 
-      <label className="text-gray-600">UserName</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter UserName *"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
-<div> 
-      <label className="text-gray-600">First Name</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter First Name *"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
-      <div> 
-      <label className="text-gray-600">Last Name</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter Last Name"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div><div>
-      <label className="text-gray-600">Email</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter Email*"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div><div>
-      <label className="text-gray-600">Image</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Image"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
-      <div> 
-      <label className="text-gray-600">Bio</label>
-      <div className="relative max-w-xs mt-2">
-    
-        <input
-          type="text"
-          placeholder="Enter Bio"
-          className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
-        />
-      </div></div>
+    <div className="flex flex-col justify-center items-center mt-16 gap-6">
+      <div>
+        <label className="text-gray-600">UserName</label>
+        <div className="relative max-w-xs mt-2">
+          <input
+            type="text"
+            name="username"
+            placeholder="Enter UserName *"
+            value={inp.username}
+          onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
+            className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="text-gray-600">First Name</label>
+        <div className="relative max-w-xs mt-2">
+          <input
+            type="text"
+            name="firstname"
+            value={inp.firstname}
+            onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
+            placeholder="Enter First Name *"
+            className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="text-gray-600">Last Name</label>
+        <div className="relative max-w-xs mt-2">
+          <input
+            type="text"
+            placeholder="Enter Last Name"
+            name="lastname"
+            value={inp.lastname}
+            onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
+            className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="text-gray-600">Email</label>
+        <div className="relative max-w-xs mt-2">
+          <input
+            type="text"
+            placeholder="Enter Email*"
+            name="email"
+            value={inp.email}
+            onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
+            className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="text-gray-600">Image</label>
+        <div className="relative max-w-xs mt-2">
+          <input
+            type="text"
+            placeholder="Image"
+            value={inp.image}
+            name="image"
+           onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
+            className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+      </div>
+      <div>
+        <label className="text-gray-600">Bio</label>
+        <div className="relative max-w-xs mt-2">
+          <input
+            type="text"
+            placeholder="Enter Bio"
+            value={inp.bio}
+            name="bio"
+            onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
+            className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
+          />
+        </div>
+      </div>
 
       <div>
         <label className="text-gray-600">Password</label>
@@ -119,32 +152,22 @@ const Register = () => {
           <input
             type={isPasswordHidden ? "password" : "text"}
             placeholder="Enter your password"
+            value={inp.password}
+            name="password"
+            onChange={(e)=>setInp({...inp,[e.target.name]:e.target.value})}
             className="w-full pr-12 pl-3 py-2 text-gray-500 bg-transparent outline-none border focus:border-indigo-600 shadow-sm rounded-lg"
           />
         </div>
       </div>
-   <p className="mt-3">Don't have an account?  <button onClick={()=>navigate('/login')}>Sign In</button></p>
-      <button
-    className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6"
->
-    Button
-</button>
+      <p className="mt-3">
+        Don't have an account?{" "}
+        <button onClick={() => navigate("/login")}>Sign In</button>
+      </p>
+      <button className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6" onClick={handle}>
+        Button
+      </button>
     </div>
   );
 };
 
 export default Register;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

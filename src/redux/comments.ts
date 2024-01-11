@@ -1,23 +1,5 @@
-
-
-
-
-
-
-
-
-
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
- import { toast } from "react-toastify";
-
-
-
-
-
-
-
-
-
+import { toast } from "react-toastify";
 
 export const commentsApi = createApi({
   reducerPath: "commentsApi",
@@ -28,13 +10,14 @@ export const commentsApi = createApi({
   endpoints: (builder) => ({
     getcomments: builder.mutation({
       query: (token) => ({
-        url: `comments?token=${token}`, 
+        url: `comments`,
+        headers: { Authorization: `Token ${token}` },
         method: "GET",
       }),
       invalidatesTags: ["Comments"],
       transformResponse: (response) => {
         toast(`The operation was successful!`);
-        return console.log(response, "RTK");
+        return response;
       },
     }),
   }),
@@ -42,10 +25,57 @@ export const commentsApi = createApi({
 
 export const { useGetcommentsMutation } = commentsApi;
 
+export const commentApi = createApi({
+  reducerPath: "commentApi",
+  tagTypes: ["Comment"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://37106.fullstack.clarusway.com/",
+  }),
+  endpoints: (builder) => ({
+    getcomment: builder.mutation({
+      query: ({ id, token }) => ({
+        url: `comment/${id}`,
+        headers: { Authorization: `Token ${token}` },
+        method: "GET",
+      }),
+      invalidatesTags: ["Comment"],
+      transformResponse: (response) => {
+        toast(`The operation was successful!`);
+        return response;
+      },
+    }),
+  }),
+});
+
+export const { useGetcommentMutation } = commentApi;
 
 
 
+export const commApi = createApi({
+  reducerPath: "commApi",
+  tagTypes: ["Comm"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://37106.fullstack.clarusway.com/",
+  }),
+  endpoints: (builder) => ({
+    postcomment: builder.mutation({
+      query: ( {token,...data}) => ({
+        url: `comments/`,
+        headers: { Authorization: `Token ${token}` },
+        method: "POST",
+        body:data
+       
+      }),
+      invalidatesTags: ["Comm"],
+      transformResponse: (response) => {
+        toast(`The operation was successful!`);
+        return response;
+      },
+    }),
+  }),
+});
 
+export const { usePostcommentMutation} = commApi;
 
 
 
@@ -69,13 +99,13 @@ export const { useGetcommentsMutation } = commentsApi;
 
 //   baseQuery: fetchBaseQuery({
 //     baseUrl: "https://37106.fullstack.clarusway.com/",
-   
+
 //   }),
 
 //   endpoints: (builder) => ({
 //     getcomments: builder.mutation({
 //       query: (token) => ({
-       
+
 //         url:'comments',
 //         method:"GET",
 //         body:token

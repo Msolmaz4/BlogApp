@@ -1,13 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useGetAllBlogsQuery } from "../../redux/blogs";
+import { useGetAllBlogMutation, useGetAllBlogsQuery } from "../../redux/blogs";
 
 import { MdOutlineComment } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar";
-import { useState } from "react";
-import { useGetcommentsMutation } from "../../redux/comments";
+import { useEffect, useState } from "react";
+import {  useGetcommentsMutation, usePostcommentMutation } from "../../redux/comments";
 
 
 const Details = () => {
@@ -19,22 +19,47 @@ const Details = () => {
   const { data } = useGetAllBlogsQuery("");
   console.log(data?.data, "details");
   const sonuc = data?.data?.filter((item) => item._id === id);
+ console.log(sonuc[0]?.comments,"dddddddddddd")
+
   const [inp, setInp] = useState("");
-const [getcomments,{ isLoading, isError, isSuccess, data: commentsData }] = useGetcommentsMutation()
+  const [getcomments,{ data: commentsData }] = useGetcommentsMutation()
+const [postcomment] = usePostcommentMutation()
+ const[getAllBlog] = useGetAllBlogMutation()
+ const [comme,setCommen] = useState("")
+
 
 
   const verme = async() => {
    
   try {
       const res=  await  getcomments(authToken)
-     console.log(res,"ttttttttttt")
+      console.log(commentsData, "alladata");
+     console.log(res?.data?.data,"ttttttttttt")
+  
+     const response = await postcomment({ token: authToken, blogId:id,comment:inp });
+     console.log(response,"'''eee")
+     
+    
     setInp("");
-    setText(false);
+   
   } catch (error) {
-    console.log(error,"getcommmmmmmmm")
+    console.log(error)
   }
  
   };
+
+
+
+useEffect(()=>{
+  const erst =async()=>{
+     const fikir = await getAllBlog({authToken,id})
+  console.log(fikir?.data?.data?.comments,"errrrrrrrrrrrrrrrrrrrrrrrrrr")
+  setCommen(fikir?.data?.data?.comments)
+  }
+ erst()
+
+},[sonuc[0]?.comments])
+
   return (
     <div>
       <Navbar/>
@@ -83,7 +108,21 @@ const [getcomments,{ isLoading, isError, isSuccess, data: commentsData }] = useG
                 </div>
               </div>
             )}
+
           </div>
+           <div>
+          
+            {
+              text && <div>
+                {
+                  comme?.map((item)=>(
+                    <div>{item.comment}</div>
+                  ))
+                }
+              </div>
+            }
+           </div>
+         
         </div>
       ))}
     </div>

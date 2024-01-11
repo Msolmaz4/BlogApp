@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useGetAllBlogsQuery } from "../../redux/blogs";
 import { MdOutlineComment } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
+
 import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
@@ -12,29 +13,29 @@ const HomeCarts = () => {
   console.log(data?.data);
   const [veri, setVeri] = useState([]);
   const [page, SetPge] = useState<number>(1);
-  const [kalp, setKalp] = useState(true);
-  const navigate = useNavigate()
+  const [hear, setHear] = useState(true);
+
+  const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
-  console.log(authToken, "jomecart");
+  console.log(authToken, "jomecartToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
   console.log(userData, "homecart");
   useEffect(() => {
     if (data?.data.length > 8) {
       console.log("first");
       setVeri(data?.data.slice(0, 8));
-      
     }
   }, [data, page]);
-
-  const hanglr = (id:string)=>{
-   console.log(id)
-    if(!authToken){
-      toast("du must login")
+  console.log(hear, "hear");
+  const hanglr = (id: string) => {
+    console.log(id);
+    if (!authToken) {
+      toast("du must login");
+    } else {
+      navigate(`details/${id}`);
     }
-    else{
-   navigate(`details/${id}`)
-    }
-  }
+  };
+  console.log(hear);
   return (
     <section>
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
@@ -69,9 +70,10 @@ const HomeCarts = () => {
         {isLoading
           ? "loading......"
           : veri?.map((item, index) => (
-              <div onClick={()=>console.log(item._id)}
+              <div
+                onClick={() => console.log(item._id)}
                 key={index}
-                className="bg-white p-4 rounded-md shadow-md h-[200px] w-[550px] ml-8 hover:bg-blue-200 flex "
+                className="bg-white p-4 rounded-md shadow-md h-[200px] w-[570px] ml-8 hover:bg-blue-200 flex "
               >
                 <div className="flex-none w-52 relative">
                   <img
@@ -95,17 +97,41 @@ const HomeCarts = () => {
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
                     <div className="flex gap-4 ">
-                      {kalp ? (
-                        <FaHeart className="" size={24}  onClick={()=> hanglr(item._id)}/>
-                      ) : (
-                        <CiHeart size={24} onClick={()=> hanglr(item._id)} />
-                      )}
+                      <div
+                      //ben b urda sonradan farkettim  allt bir cart acsaydim bunu yazmamgerek kalmiyacakti
+                       
+                        onClick={() =>
+                          setVeri((deger) =>
+                            deger.map((son) => {
+                              if (son._id === item._id) {
+                                return {
+                                  ...son,
+                                  hear: !son.hear,
+                                };
+                              }
+                              return son;
+                            })
+                          )
+                        }
+                      >
+                        {item.hear ? (
+                          <div> <FaHeart size={24} /><p>{item.likes.length + 1}</p></div>
+                          
+                        ) : (<div><CiHeart size={24} /> {item.likes.length}</div>
+                          
+                        )}
+                      </div>
 
-                      <FaEye size={24} onClick={()=> hanglr(item._id)} />
-                      <MdOutlineComment size={24}  onClick={()=> hanglr(item._id)}/>
+                      <FaEye size={24} />
+                      <p>{item?.countOfVisitors}</p>
+                      <MdOutlineComment size={24} />
+                      <p>{item?.comments.length}</p>
                     </div>
                     <div>
-                      <button className="cta w-36 h-8 mt-[-7px]" onClick={()=> hanglr(item._id)}>
+                      <button
+                        className="cta w-36 h-8 mt-[-7px]"
+                        onClick={() => hanglr(item._id)}
+                      >
                         <span className="span">Read </span>
                         <span className="second">
                           <svg

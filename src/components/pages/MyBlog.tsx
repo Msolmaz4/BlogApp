@@ -3,31 +3,31 @@ import { useGetAllBlogsQuery } from "../../redux/blogs";
 import { useState } from "react";
 import { MdOutlineComment } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { FaEye } from "react-icons/fa";
 
 const MyBlog = () => {
   const userData = JSON.parse(localStorage.getItem("userData"));
   const { data } = useGetAllBlogsQuery("");
-  const navi = useNavigate()
-  console.log(userData, "userDtsa");
-  console.log(data?.data, "ana");
+
+
 
   const [ekran, setEKran] = useState(
     data?.data.filter((item) => item.userId == userData._id)
   );
-  console.log(ekran);
 
+  console.log(userData, "userDtsa");
+  console.log(data?.data, "ana");
 
-  const myDeat= (id)=>{
-     navi(`detail/${id}`)
-  }
+  
   return (
     <div>
       <Navbar />
       <div className="flex gap-4">
-        {ekran.map((item, index) => (
+
+
+        {   ekran.length === 0 ? "keine doc":  ( ekran?.map((item, index) => (
           <div
             key={index}
             className="bg-white p-4 rounded-md shadow-md h-[200px] w-[570px] ml-8 hover:bg-blue-200 flex "
@@ -60,10 +60,8 @@ const MyBlog = () => {
                   <p>{item?.comments.length}</p>
                 </div>
                 <div>
-                  <button
-                    className="cta w-36 h-8 mt-[-7px]"
-                    onClick={() => myDeat(item._id)}
-                  >
+                  <Link to={`detail/${item._id}`} state={{state:item}}  className="cta w-36 h-8 mt-[-7px]" onClick={()=>console.log("cddddddddd")}>
+                 
                     <span className="span">Read </span>
                     <span className="second">
                       <svg
@@ -99,12 +97,14 @@ const MyBlog = () => {
                         </g>
                       </svg>
                     </span>
-                  </button>
+                  
+                  </Link>
                 </div>
               </div>
             </div>
           </div>
-        ))}
+        ))) 
+          }
       </div>
     </div>
   );

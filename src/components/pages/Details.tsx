@@ -7,8 +7,10 @@ import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import Navbar from "../Navbar/Navbar";
 import { useEffect, useState } from "react";
-import {  useGetcommentsMutation, usePostcommentMutation } from "../../redux/comments";
-
+import {
+  useGetcommentsMutation,
+  usePostcommentMutation,
+} from "../../redux/comments";
 
 const Details = () => {
   const { id } = useParams();
@@ -19,50 +21,45 @@ const Details = () => {
   const { data } = useGetAllBlogsQuery("");
   console.log(data?.data, "details");
   const sonuc = data?.data?.filter((item) => item._id === id);
- console.log(sonuc[0]?.comments,"dddddddddddd")
+  console.log(sonuc[0]?.comments, "dddddddddddd");
 
   const [inp, setInp] = useState("");
-  const [getcomments,{ data: commentsData }] = useGetcommentsMutation()
-const [postcomment] = usePostcommentMutation()
- const[getAllBlog] = useGetAllBlogMutation()
- const [comme,setCommen] = useState("")
+  const [getcomments, { data: commentsData }] = useGetcommentsMutation();
+  const [postcomment] = usePostcommentMutation();
+  const [getAllBlog] = useGetAllBlogMutation();
+  const [comme, setCommen] = useState("");
 
-
-
-  const verme = async() => {
-   
-  try {
-      const res=  await  getcomments(authToken)
+  const verme = async () => {
+    try {
+      const res = await getcomments(authToken);
       console.log(commentsData, "alladata");
-     console.log(res?.data?.data,"ttttttttttt")
-  
-     const response = await postcomment({ token: authToken, blogId:id,comment:inp });
-     console.log(response,"'''eee")
-     
-    
-    setInp("");
-   
-  } catch (error) {
-    console.log(error)
-  }
- 
+      console.log(res?.data?.data, "ttttttttttt");
+
+      const response = await postcomment({
+        token: authToken,
+        blogId: id,
+        comment: inp,
+      });
+      console.log(response, "'''eee");
+
+      setInp("");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-
-
-useEffect(()=>{
-  const erst =async()=>{
-     const fikir = await getAllBlog({authToken,id})
-  console.log(fikir?.data?.data?.comments,"errrrrrrrrrrrrrrrrrrrrrrrrrr")
-  setCommen(fikir?.data?.data?.comments)
-  }
- erst()
-
-},[sonuc[0]?.comments])
+  useEffect(() => {
+    const erst = async () => {
+      const fikir = await getAllBlog({ authToken, id });
+      console.log(fikir?.data?.data?.comments, "errrrrrrrrrrrrrrrrrrrrrrrrrr");
+      setCommen(fikir?.data?.data?.comments);
+    };
+    erst();
+  }, [sonuc[0]?.comments]);
 
   return (
     <div>
-      <Navbar/>
+      <Navbar />
       {sonuc.map((item) => (
         <div className="border-4 border-indigo-500/100">
           <p>{item.title}</p>
@@ -108,21 +105,16 @@ useEffect(()=>{
                 </div>
               </div>
             )}
-
           </div>
-           <div>
-          
-            {
-              text && <div>
-                {
-                  comme?.map((item)=>(
-                    <div>{item.comment}</div>
-                  ))
-                }
+          <div>
+            {text && (
+              <div>
+                {comme?.map((item) => (
+                  <div>{item.comment}</div>
+                ))}
               </div>
-            }
-           </div>
-         
+            )}
+          </div>
         </div>
       ))}
     </div>

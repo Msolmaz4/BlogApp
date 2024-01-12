@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useGetAllBlogsQuery } from "../../redux/blogs";
+import { useDislikeBlogMutation, useGetAllBlogsQuery, useLikeBlogMutation } from "../../redux/blogs";
 import { MdOutlineComment } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 
@@ -16,9 +16,10 @@ const HomeCarts = () => {
 
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);
-
+  const [dol,setDol] = useState(false)
   const [search, setSearch] = useState("");
-
+ const  [likeBlog] = useLikeBlogMutation()
+ const [dislikeApi] = useDislikeBlogMutation()
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -32,7 +33,7 @@ const HomeCarts = () => {
     };
     dert();
   }, [data, page, search]);
-
+console.log(data?.data,"homecar")
   const hanglr = (id: string) => {
     if (!authToken) {
       toast("du must login");
@@ -40,7 +41,7 @@ const HomeCarts = () => {
       navigate(`details/${id}`);
     }
   };
-
+  
   return (
     <section>
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
@@ -96,7 +97,7 @@ const HomeCarts = () => {
                     Published Date:{item.createdAt.slice(0, 10)}
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
-                    <div className="flex gap-4 ">
+                    <div className="flex gap-4">
                       <div
                         //ben b urda sonradan farkettim  allt bir cart acsaydim bunu yazmamgerek kalmiyacakti
 
@@ -104,6 +105,9 @@ const HomeCarts = () => {
                           setVeri((deger) =>
                             deger.map((son) => {
                               if (son._id === item._id) {
+                                  setDol(!dol)
+                                  console.log(dol,"dolllllll")
+                                  dol ? (dislikeApi({id:item._id,token:authToken})):(likeBlog({id:item._id,token:authToken}))
                                 return {
                                   ...son,
                                   hear: !son.hear,
@@ -115,17 +119,25 @@ const HomeCarts = () => {
                         }
                       >
                         {item.hear ? (
-                          <div>
-                            {" "}
-                            <FaHeart size={24} />
-                            <p>{item.likes.length + 1}</p>
+                          <div className="border-2 border-sky-500"  >
+                         
+                            <FaHeart size={24}  />
+                            <p>{item?.likes.length }</p>
                           </div>
                         ) : (
-                          <div>
-                            <CiHeart size={24} /> {item.likes.length}
+                          <div  className="border-2 border-sky-500">
+                            <CiHeart size={24}  /> {item?.likes.length}
                           </div>
                         )}
-                      </div>
+                      </div> 
+
+                    
+                   
+                    
+
+
+
+
 
                       <FaEye size={24} />
                       <p>{item?.countOfVisitors}</p>

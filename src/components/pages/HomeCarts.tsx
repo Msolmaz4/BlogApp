@@ -176,7 +176,8 @@ const HomeCarts = () => {
                 </div>
               </div>
             ))}
-       <NewProduct/>
+           
+           <NewProduct/>
       </div>
 
       <p>{page}</p>

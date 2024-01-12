@@ -11,6 +11,11 @@ interface In {
 
 const pers = [
  {
+    name:"logout",
+    url:""
+  },
+
+ {
     name: "My Blog",
     url: "/myblog",
   },
@@ -19,10 +24,7 @@ const pers = [
     url: "/about",
   },
  
-  {
-    name:"logout",
-    
-  }
+ 
 ];
 
 const Navbar = ({ darkTheme, theme }: In) => {
@@ -72,7 +74,7 @@ const hand3 = (name)=>{
                 <NavLink  onClick={()=>hand3(item.name)}
                   key={item.name}
                   to={item.url}
-                  className="block px-4 py-2 text-sm text-white"
+                  className="block px-4 py-2 text-sm text-black"
                 >
                   {item.name}
                 </NavLink>

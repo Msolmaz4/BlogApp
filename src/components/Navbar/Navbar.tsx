@@ -10,12 +10,12 @@ interface In {
 }
 
 const pers = [
- {
-    name:"logout",
-    url:""
+  {
+    name: "logout",
+    url: "",
   },
 
- {
+  {
     name: "My Blog",
     url: "/myblog",
   },
@@ -23,23 +23,19 @@ const pers = [
     name: "about",
     url: "/about",
   },
- 
- 
 ];
 
 const Navbar = ({ darkTheme, theme }: In) => {
   const [open, setOpen] = useState<boolean>(false);
   const authToken = localStorage.getItem("authToken");
-  console.log(authToken, "navbaraaaaaa");
-  const [logout] =useLogoutMutation()
-const hand3 = (name)=>{
- console.log(name)
- if(name == "logout"){
-  localStorage.clear()
-  logout(authToken)
- }
-}
 
+  const [logout] = useLogoutMutation();
+  const hand3 = (name) => {
+    if (name == "logout") {
+      localStorage.clear();
+      logout(authToken);
+    }
+  };
 
   return (
     <div className="navbar">
@@ -47,7 +43,6 @@ const hand3 = (name)=>{
 
       <div className="navbar_right">
         <div></div>
-
         <NavLink
           to={"/"}
           style={({ isActive }) => {
@@ -55,23 +50,22 @@ const hand3 = (name)=>{
               fontWeight: isActive ? "bold" : "white",
               fontSize: isActive ? 20 : 12,
             };
-          }}
-        >
+          }}>
           <div>home</div>{" "}
         </NavLink>
-
-        <div className="shrink-0">
+        <div className="shrink-0 z-10">
           <button onClick={() => setOpen(!open)}>
             <img
               className="h-16 w-16 object-cover rounded-full"
               src="https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80"
               alt="Current profile photo"
-            />{" "}
+            />
           </button>
-          { authToken && open ? (
+          {authToken && open ? (
             <div>
               {pers?.map((item) => (
-                <NavLink  onClick={()=>hand3(item.name)}
+                <NavLink
+                  onClick={() => hand3(item.name)}
                   key={item.name}
                   to={item.url}
                   className="block px-4 py-2 text-sm text-black"
@@ -80,16 +74,17 @@ const hand3 = (name)=>{
                 </NavLink>
               ))}
             </div>
-          ) : ""}
-          { !authToken && open ? (
+          ) : (
+            ""
+          )}
+          {!authToken && open ? (
             <div>
-<NavLink to='/login'>login</NavLink>
-
+              <NavLink to="/login">login</NavLink>
             </div>
-          ) : ""}
-
+          ) : (
+            ""
+          )}
         </div>
-
         <div>
           <div className="shrink-0">
             <button

@@ -9,39 +9,38 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Search from "./Search";
 import NewProduct from "./NewProduct";
+import PageNav from "./PageNav";
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("");
-  console.log(data?.data);
+
   const [veri, setVeri] = useState([]);
-  const [page, SetPge] = useState<number>(1);
-  const [hear, setHear] = useState(true);
-  const [search,setSearch] = useState("")
+  const [page, SetPage] = useState<number>(1);
 
-  console.log(search,"searchhhhh")
-
+  const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
-  console.log(authToken, "jomecartToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
   console.log(userData, "homecart");
   useEffect(() => {
-    if (data?.data.length > 8) {
-      console.log("first");
-      setVeri(data?.data.slice(0, 8));
-    }
-  }, [data, page,search]);
-  console.log(hear, "hear");
+    const dert = async () => {
+      if (data?.data.length > 8) {
+        console.log("first");
+        setVeri(data?.data.slice((page - 1) * 8, (page - 1) * 8 + 8));
+      }
+    };
+    dert();
+  }, [data, page, search]);
+
   const hanglr = (id: string) => {
-    console.log(id);
     if (!authToken) {
       toast("du must login");
     } else {
       navigate(`details/${id}`);
     }
   };
-  console.log(hear);
+
   return (
     <section>
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
@@ -56,20 +55,24 @@ const HomeCarts = () => {
             )}
           </h2>
         </div>
-      <Search setSearch={setSearch}/>
+        <Search setSearch={setSearch} />
       </header>
       <div className="grid gap-4 grid-cols-3 grid-rows-3">
-        {isLoading
-          ? (
-            <button type="button" className="bg-indigo-500 ..." disabled>
-              <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
-                
-              </svg>
-              Processing...
-            </button> )
-          : veri?.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase())).map((item, index) => (
+        {isLoading ? (
+          <button type="button" className="bg-indigo-500 ..." disabled>
+            <svg
+              className="animate-spin h-5 w-5 mr-3 ..."
+              viewBox="0 0 24 24"
+            ></svg>
+            Processing...
+          </button>
+        ) : (
+          veri
+            ?.filter((item) =>
+              item.title.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((item, index) => (
               <div
-                onClick={() => console.log(item._id)}
                 key={index}
                 className="bg-white p-4 rounded-md shadow-md h-[200px] w-[570px] ml-8 hover:bg-blue-200 flex "
               >
@@ -90,7 +93,6 @@ const HomeCarts = () => {
                     {item.content.split(" ").slice(0, 10).join(" ")}....
                   </p>
                   <p className="text-slate-400 text-justify">
-                    {" "}
                     Published Date:{item.createdAt.slice(0, 10)}
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
@@ -175,12 +177,15 @@ const HomeCarts = () => {
                   </div>
                 </div>
               </div>
-            ))}
-           
-           <NewProduct/>
+            ))
+        )}
+
+        <NewProduct />
       </div>
 
-      <p>{page}</p>
+      <div className="flex justify-center gap-4 text-xl border border-sky-500 rounded-full w-24 h-12 items-center ml-[900px] mt-2  bg-sky-500 text-white">
+        <PageNav setPage={SetPage} page={page} />
+      </div>
     </section>
   );
 };

@@ -3,6 +3,7 @@ import Details from "../components/pages/Details";
 import Home from "../components/pages/Home"
 import Login from "../components/pages/Login"
 import MyBlog from "../components/pages/MyBlog";
+import MyDetail from "../components/pages/MyDetail";
 import Register from "../components/pages/Register"
 
 
@@ -31,6 +32,11 @@ const routes = [
     {
       path:"myblog",
       element: authToken ? <MyBlog/> : <Home/>
+      
+    },
+    {
+      path:"myblog/detail/:id",
+      element: authToken ? <MyDetail/> : <Home/>
       
     },
     {

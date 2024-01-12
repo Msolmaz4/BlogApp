@@ -8,6 +8,7 @@ import { FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import Search from "./Search";
+import NewProduct from "./NewProduct";
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("");
@@ -59,7 +60,13 @@ const HomeCarts = () => {
       </header>
       <div className="grid gap-4 grid-cols-3 grid-rows-3">
         {isLoading
-          ? "loading......"
+          ? (
+            <button type="button" className="bg-indigo-500 ..." disabled>
+              <svg className="animate-spin h-5 w-5 mr-3 ..." viewBox="0 0 24 24">
+                
+              </svg>
+              Processing...
+            </button> )
           : veri?.filter((item)=>item.title.toLowerCase().includes(search.toLowerCase())).map((item, index) => (
               <div
                 onClick={() => console.log(item._id)}
@@ -169,18 +176,7 @@ const HomeCarts = () => {
                 </div>
               </div>
             ))}
-        <button className="hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group w-full flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3">
-          <svg
-            className="group-hover:text-blue-500 mb-1 text-slate-400"
-            width="20"
-            height="20"
-            fill="currentColor"
-            aria-hidden="true"
-          >
-            <path d="M10 5a1 1 0 0 1 1 1v3h3a1 1 0 1 1 0 2h-3v3a1 1 0 1 1-2 0v-3H6a1 1 0 1 1 0-2h3V6a1 1 0 0 1 1-1Z" />
-          </svg>
-          New project
-        </button>
+       <NewProduct/>
       </div>
 
       <p>{page}</p>

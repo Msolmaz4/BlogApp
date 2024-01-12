@@ -31,17 +31,19 @@ const Details = () => {
 
   const verme = async () => {
     try {
-      const res = await getcomments(authToken);
-      console.log(commentsData, "alladata");
-      console.log(res?.data?.data, "ttttttttttt");
+      if (inp.length > 1) {
+        const res = await getcomments(authToken);
+        console.log(commentsData, "alladata");
+        console.log(res?.data?.data, "ttttttttttt");
+        const response = await postcomment({
+          token: authToken,
+          blogId: id,
+          comment: inp,
+        });
+        console.log(response, "'''eee");
+      }
 
-      const response = await postcomment({
-        token: authToken,
-        blogId: id,
-        comment: inp,
-      });
-      console.log(response, "'''eee");
-
+      setText(false);
       setInp("");
     } catch (error) {
       console.log(error);

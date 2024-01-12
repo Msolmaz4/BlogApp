@@ -14,7 +14,6 @@ const pers = [
     name: "logout",
     url: "",
   },
-
   {
     name: "My Blog",
     url: "/myblog",
@@ -50,7 +49,8 @@ const Navbar = ({ darkTheme, theme }: In) => {
               fontWeight: isActive ? "bold" : "white",
               fontSize: isActive ? 20 : 12,
             };
-          }}>
+          }}
+        >
           <div>home</div>{" "}
         </NavLink>
         <div className="shrink-0 z-10">

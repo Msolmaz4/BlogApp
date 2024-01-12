@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { blogsApi ,blogApi} from './blogs' 
+import { blogsApi ,blogApi,blApi} from './blogs' 
 import { authApi, logApi, logoutApi } from './auth'
 import {  commentsApi ,commentApi,commApi} from './comments'
 
@@ -8,6 +8,7 @@ export const store = configureStore({
   reducer: {
 
     [blogsApi.reducerPath]: blogsApi.reducer,
+    [blApi.reducerPath]: blApi.reducer,
 
     [blogApi.reducerPath]: blogApi.reducer,
     [commentsApi.reducerPath]: commentsApi.reducer,
@@ -19,7 +20,7 @@ export const store = configureStore({
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-  getDefaultMiddleware().concat(blogsApi.middleware).concat(authApi.middleware).concat(logApi.middleware).concat(logoutApi.middleware).concat(commentsApi.middleware).concat(commentApi.middleware).concat(commApi.middleware).concat(blogApi.middleware),
+  getDefaultMiddleware().concat(blogsApi.middleware).concat(authApi.middleware).concat(logApi.middleware).concat(logoutApi.middleware).concat(commentsApi.middleware).concat(commentApi.middleware).concat(commApi.middleware).concat(blogApi.middleware).concat(blApi.middleware)
 })
 
 

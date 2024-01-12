@@ -2,8 +2,10 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { usePostBlogMutation } from "../../redux/blogs";
 
 const NewModal = ({ show, handleClose}) => {
+    const authToken = localStorage.getItem("authToken");
 const [inp ,setInp] =useState({
     categoryId: "",
   title: "",
@@ -11,18 +13,22 @@ const [inp ,setInp] =useState({
   image: "",
   isPublish: ""
 })
-
-const derle = (e)=>{
+ const [postBlog] = usePostBlogMutation()
+const derle = async(e)=>{
     e.preventDefault()
     console.log(inp,"mofd=aaa")
     handleClose()
     setInp({
-        categoryId: "",
+      categoryId: "",
       title: "",
       content: "",
       image: "",
       isPublish: ""
     })
+      
+      const top = await postBlog({token:authToken,categoryId:inp.categoryId ,title: inp.title, content:inp.content,image:inp.image,isPublish:inp.isPublish })
+
+console.log(top,"top")
 }
   return (
     <div>

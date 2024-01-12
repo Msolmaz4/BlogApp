@@ -40,3 +40,31 @@ export const blogApi = createApi({
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
 export const { useGetAllBlogMutation} = blogApi
+
+
+
+
+export const blApi = createApi({
+  reducerPath: 'blApi',
+  tagTypes: ["Bl"],//basta hafixada tutat 
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  endpoints: (builder) => ({
+    postBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+      query: ({ token,...data }) => ({
+        url: `blogs/`,
+        headers: { Authorization: `Token ${token}` },
+        method: "POST",
+        body:data
+      }),
+      invalidatesTags: ["Bl"],//bunu yapmazan guncellme almmzdikkat
+      transformResponse: (response) => {
+        toast(`The operation was successful!`);
+        return response;
+      },
+    }),
+  }),
+})
+
+// Export hooks for usage in functional components, which are
+// auto-generated based on the defined endpoints
+export const {usePostBlogMutation } = blApi

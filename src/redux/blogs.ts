@@ -131,7 +131,7 @@ export const dislikeApi = createApi({
   endpoints: (builder) => ({
     dislikeBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
       query: ({ id,token}) => ({
-        url: `blogs/${id}/getLike`,
+        url: `blogs/${id}/postLike`,
         headers: { Authorization: `Token ${token}` },
         method: "POST",
        

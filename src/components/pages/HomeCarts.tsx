@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useDislikeBlogMutation, useGetAllBlogsQuery, useLikeBlogMutation } from "../../redux/blogs";
+import { useGetAllBlogsQuery } from "../../redux/blogs";
 import { MdOutlineComment } from "react-icons/md";
 import { CiHeart } from "react-icons/ci";
 
@@ -10,16 +10,16 @@ import { useNavigate } from "react-router-dom";
 import Search from "./Search";
 import NewProduct from "./NewProduct";
 import PageNav from "./PageNav";
+import Like from "./Like";
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("");
 
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);
-  const [dol,setDol] = useState(false)
+  
   const [search, setSearch] = useState("");
- const  [likeBlog] = useLikeBlogMutation()
- const [dislikeApi] = useDislikeBlogMutation()
+
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
@@ -98,41 +98,10 @@ console.log(data?.data,"homecar")
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
                     <div className="flex gap-4">
-                      <div
-                        //ben b urda sonradan farkettim  allt bir cart acsaydim bunu yazmamgerek kalmiyacakti
-
-                        onClick={() =>
-                          setVeri((deger) =>
-                            deger.map((son) => {
-                              if (son._id === item._id) {
-                                  setDol(!dol)
-                                  console.log(dol,"dolllllll")
-                                  dol ? (dislikeApi({id:item._id,token:authToken})):(likeBlog({id:item._id,token:authToken}))
-                                return {
-                                  ...son,
-                                  hear: !son.hear,
-                                };
-                              }
-                              return son;
-                            })
-                          )
-                        }
-                      >
-                        {item.hear ? (
-                          <div className="border-2 border-sky-500"  >
-                         
-                            <FaHeart size={24}  />
-                            <p>{item?.likes.length }</p>
-                          </div>
-                        ) : (
-                          <div  className="border-2 border-sky-500">
-                            <CiHeart size={24}  /> {item?.likes.length}
-                          </div>
-                        )}
-                      </div> 
+                     
 
                     
-                   
+                   <Like setVeri={setVeri} item={item}/>
                     
 
 

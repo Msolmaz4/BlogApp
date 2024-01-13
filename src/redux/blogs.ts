@@ -4,51 +4,39 @@ import { toast } from "react-toastify";
 // Define a service using a base URL and expected endpoints
 export const blogsApi = createApi({
   reducerPath: 'blogsApi',
+  tagTypes: ['Blogs'],
   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
   endpoints: (builder) => ({
     getAllBlogs: builder.query({
-       
-        query: () => "blogs",
+      query: () => "blogs",
     }),
-  }),
-})
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetAllBlogsQuery } = blogsApi
+    deletBlog: builder.mutation({
+      query: ({ id, token }) => ({
+        url: `blogs/${id}`,
+        headers: { Authorization: `Token ${token}` },
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Blogs'],
+      transformResponse: (response) => {
+        toast('İşlem başarılı oldu!');
+        return response;
+      },
+    }),
 
-export const blogApi = createApi({
-  reducerPath: 'blogApi',
-  tagTypes: ["Blog"],//basta hafixada tutat 
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
-  endpoints: (builder) => ({
     getAllBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
       query: ({ id, token }) => ({
         url: `blogs/${id}`,
         headers: { Authorization: `Token ${token}` },
         method: "GET",
       }),
-      invalidatesTags: ["Blog"],//bunu yapmazan guncellme almmzdikkat
+      invalidatesTags: ["Blogs"],//bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
       
         return response;
       },
     }),
-  }),
-})
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useGetAllBlogMutation} = blogApi
-
-
-
-
-export const blApi = createApi({
-  reducerPath: 'blApi',
-  tagTypes: ["Bl"],//basta hafixada tutat 
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
-  endpoints: (builder) => ({
     postBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
       query: ({ token,...data }) => ({
         url: `blogs/`,
@@ -56,44 +44,99 @@ export const blApi = createApi({
         method: "POST",
         body:data
       }),
-      invalidatesTags: ["Bl"],//bunu yapmazan guncellme almmzdikkat
+      invalidatesTags: ["Blogs"],//bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
         toast(`The operation was successful!`);
         return response;
       },
     }),
+
+
+    
   }),
+  
 })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const {usePostBlogMutation } = blApi
+
+export const { useGetAllBlogsQuery,useDeletBlogMutation,useGetAllBlogMutation,usePostBlogMutation } = blogsApi
+
+// export const blogApi = createApi({
+//   reducerPath: 'blogApi',
+//   tagTypes: ["Blog"],//basta hafixada tutat 
+//   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+//   endpoints: (builder) => ({
+//     getAllBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+//       query: ({ id, token }) => ({
+//         url: `blogs/${id}`,
+//         headers: { Authorization: `Token ${token}` },
+//         method: "GET",
+//       }),
+//       invalidatesTags: ["Blog"],//bunu yapmazan guncellme almmzdikkat
+//       transformResponse: (response) => {
+      
+//         return response;
+//       },
+//     }),
+//   }),
+// })
+
+// // Export hooks for usage in functional components, which are
+// // auto-generated based on the defined endpoints
+// export const { useGetAllBlogMutation} = blogApi
 
 
-export const delethApi = createApi({
-  reducerPath: 'delethApi',
-  tagTypes: ["Delet"],//basta hafixada tutat 
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
-  endpoints: (builder) => ({
-    deletBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
-      query: ({ id,token}) => ({
-        url: `blogs/${id}`,
-        headers: { Authorization: `Token ${token}` },
-        method: "DELETE",
+
+
+// export const blApi = createApi({
+//   reducerPath: 'blApi',
+//   tagTypes: ["Bl"],//basta hafixada tutat 
+//   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+//   endpoints: (builder) => ({
+//     postBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+//       query: ({ token,...data }) => ({
+//         url: `blogs/`,
+//         headers: { Authorization: `Token ${token}` },
+//         method: "POST",
+//         body:data
+//       }),
+//       invalidatesTags: ["Bl"],//bunu yapmazan guncellme almmzdikkat
+//       transformResponse: (response) => {
+//         toast(`The operation was successful!`);
+//         return response;
+//       },
+//     }),
+//   }),
+// })
+
+// // Export hooks for usage in functional components, which are
+// // auto-generated based on the defined endpoints
+// export const {usePostBlogMutation } = blApi
+
+
+// export const delethApi = createApi({
+//   reducerPath: 'delethApi',
+//   tagTypes: ["Blog"],//basta hafixada tutat 
+//   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+//   endpoints: (builder) => ({
+//     deletBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+//       query: ({ id,token}) => ({
+//         url: `blogs/${id}`,
+//         headers: { Authorization: `Token ${token}` },
+//         method: "DELETE",
        
-      }),
-      invalidatesTags: ["Delet"],//bunu yapmazan guncellme almmzdikkat
-      transformResponse: (response) => {
-        toast(`The operation was successful!`);
-        return response;
-      },
-    }),
-  }),
-})
+//       }),
+//       invalidatesTags: ["Delet"],//bunu yapmazan guncellme almmzdikkat
+//       transformResponse: (response) => {
+//         toast(`The operation was successful!`);
+//         return response;
+//       },
+//     }),
+//   }),
+// })
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useDeletBlogMutation} = delethApi
+// // Export hooks for usage in functional components, which are
+// // auto-generated based on the defined endpoints
+// export const { useDeletBlogMutation} = delethApi
 
 
 

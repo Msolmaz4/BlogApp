@@ -14,12 +14,11 @@ const Like = ({ setVeri, item ,veri}) => {
   const userData = JSON.parse(localStorage.getItem("userData"));
   console.log(userData,"likkkkk")
 
-  const derttt = veri?.map((item)=>Object.values(item.likes).filter((itr)=>itr == userData._id))
-  console.log(derttt)
+  
   return (
     <div>
       <div className="flex gap-4">
-        <div
+        <div className="border-2 border-sky-500 w-6 h-8"
           onClick={() => authToken ?
             setVeri((deger) =>
               deger.map((son) => {
@@ -29,6 +28,8 @@ const Like = ({ setVeri, item ,veri}) => {
                   dol
                     ? dislikeApi({ id: item._id, token: authToken })
                     : likeBlog({ id: item._id, token: authToken });
+
+                    
                   return {
                     ...son,
                     hear: !son.hear,

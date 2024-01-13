@@ -27,7 +27,7 @@ const MyBlog = () => {
       <div className="flex gap-4">
 
 
-        {   ekran.length === 0 ? "keine doc":  ( ekran?.map((item, index) => (
+        {   ekran?.length === 0 ? "keine doc":  ( ekran?.map((item, index) => (
           <div
             key={index}
             className="bg-white p-4 rounded-md shadow-md h-[200px] w-[570px] ml-8 hover:bg-blue-200 flex "

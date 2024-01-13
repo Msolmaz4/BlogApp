@@ -1,9 +1,6 @@
 import { useEffect, useState } from "react";
 import { useGetAllBlogsQuery } from "../../redux/blogs";
 import { MdOutlineComment } from "react-icons/md";
-import { CiHeart } from "react-icons/ci";
-
-import { FaHeart } from "react-icons/fa";
 import { FaEye } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -17,13 +14,15 @@ const HomeCarts = () => {
 
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);
-  
+
   const [search, setSearch] = useState("");
 
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
-  console.log(userData, "homecart");
+ 
+
+
   useEffect(() => {
     const dert = async () => {
       if (data?.data.length > 8) {
@@ -33,7 +32,9 @@ const HomeCarts = () => {
     };
     dert();
   }, [data, page, search]);
-console.log(data?.data,"homecar")
+
+
+
   const hanglr = (id: string) => {
     if (!authToken) {
       toast("du must login");
@@ -41,7 +42,7 @@ console.log(data?.data,"homecar")
       navigate(`details/${id}`);
     }
   };
-  
+
   return (
     <section>
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
@@ -98,16 +99,12 @@ console.log(data?.data,"homecar")
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
                     <div className="flex gap-4">
-                     
-
-                    
-                   <Like setVeri={setVeri} item={item}/>
-                    
 
 
+                      <Like setVeri={setVeri} item={item}  veri = {veri}/>
 
 
-
+                      
                       <FaEye size={24} />
                       <p>{item?.countOfVisitors}</p>
                       <MdOutlineComment size={24} />

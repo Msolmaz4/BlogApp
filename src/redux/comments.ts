@@ -5,7 +5,7 @@ export const commentsApi = createApi({
   reducerPath: "commentsApi",
   tagTypes: ["Comments"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://37106.fullstack.clarusway.com/",
+    baseUrl: import.meta.env.VITE_BASE_URL,
   }),
   endpoints: (builder) => ({
     getcomments: builder.mutation({
@@ -29,7 +29,7 @@ export const commentApi = createApi({
   reducerPath: "commentApi",
   tagTypes: ["Comment"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://37106.fullstack.clarusway.com/",
+    baseUrl: import.meta.env.VITE_BASE_URL,
   }),
   endpoints: (builder) => ({
     getcomment: builder.mutation({
@@ -55,7 +55,7 @@ export const commApi = createApi({
   reducerPath: "commApi",
   tagTypes: ["Comm"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://37106.fullstack.clarusway.com/",
+    baseUrl: import.meta.env.VITE_BASE_URL,
   }),
   endpoints: (builder) => ({
     postcomment: builder.mutation({

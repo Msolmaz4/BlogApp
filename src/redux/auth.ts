@@ -4,7 +4,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const authApi = createApi({
     reducerPath: 'authApi',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+    baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL}),
     endpoints: (builder) => ({
       register: builder.mutation({ //cagiriken burfdaki isim olacak dikkat et
         query: (data) => ({
@@ -24,7 +24,7 @@ export const {useRegisterMutation   } = authApi
 
 export const logApi = createApi({
   reducerPath: 'logApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   endpoints: (builder) => ({
     log: builder.mutation({ //cagiriken burfdaki isim olacak dikkat et
       query: (data) => ({
@@ -45,7 +45,7 @@ export const { useLogMutation } = logApi
 
 export const logoutApi = createApi({
   reducerPath: 'logoutApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   endpoints: (builder) => ({
     logout: builder.mutation({ //cagiriken burfdaki isim olacak dikkat et
       query: (data) => ({

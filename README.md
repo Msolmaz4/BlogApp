@@ -8,8 +8,20 @@ Currently, two official plugins are available:
 
 
 
+```
+```
+blogapp
+├─ .eslintrc.cjs
+├─ 
+├─ .gitignore
+├─ index.html
+├─ package-lock.json
+├─ package.json
+├─ postcss.config.js
+├─ public
+│  └─ vite.svg
+├─ README.md
 ├─ src
-│  ├─ App.css
 │  ├─ App.tsx
 │  ├─ assets
 │  │  └─ react.svg

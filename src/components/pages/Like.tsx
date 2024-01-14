@@ -8,17 +8,17 @@ const Like = ({ setVeri, item ,veri}) => {
    // console.log(item._id,'likdeki')
    // console.log(veri,"likadiy")
   const [dol, setDol] = useState(false);
-  const [likeBlog] = useLikeBlogMutation();
+  const [likeBlog,{data}] = useLikeBlogMutation();
   const [dislikeApi] = useDislikeBlogMutation();
   const authToken = localStorage.getItem("authToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
  // console.log(userData,"likkkkk")
-
+console.log(data,"like")
   
   return (
     <div>
-      <div className="flex gap-4">
-        <div className="border-2 border-sky-500 w-6 h-8"
+      <div className="flex gap-2">
+        <div 
           onClick={() => authToken ?
             setVeri((deger) =>
               deger.map((son) => {
@@ -41,9 +41,11 @@ const Like = ({ setVeri, item ,veri}) => {
           }
         >
          
-    
+    {data?.didUserLike ? <FaHeart size={24}/> : <CiHeart size={24}/>}
         </div>
+        
       </div>
+
     </div>
   );
 };

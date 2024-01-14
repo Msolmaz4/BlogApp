@@ -32,8 +32,8 @@ const UpdateModal = ({ show, handleClose, state, update }) => {
 
       const der = await putBlog({ id: state._id, token: authToken, data: inp });
       console.log(der, "updateclick");
-
-      navi("/myblog");
+update()
+      navi("/");
     } catch (error) {
       console.error("Blog update error:", error);
      

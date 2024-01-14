@@ -55,7 +55,7 @@ export const blogsApi = createApi({
     }),
     putBlog: builder.mutation({
       //cagiriken buun kullaniyoruy
-      query: ({ id,token, ...data }) => ({
+      query: ({ id, token, data }) => ({
         url: `blogs/${id}`,
         headers: { Authorization: `Token ${token}` },
         method: "PATCH",
@@ -64,6 +64,34 @@ export const blogsApi = createApi({
       invalidatesTags: ["Blogs"], //bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
         toast(`The operation was successful!`);
+        return response;
+      },
+    }),
+
+    likeBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
+      query: ({ id, token }) => ({
+        url: `blogs/${id}/getLike`,
+        headers: { Authorization: `Token ${token}` },
+        method: "GET",
+      }),
+      invalidatesTags: ["Blogs"], //bunu yapmazan guncellme almmzdikkat
+      transformResponse: (response) => {
+        toast(`The operation like successful!`);
+        return response;
+      },
+    }),
+
+    dislikeBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
+      query: ({ id, token }) => ({
+        url: `blogs/${id}/postLike`,
+        headers: { Authorization: `Token ${token}` },
+        method: "POST",
+      }),
+      invalidatesTags: ["Blogs"],
+      transformResponse: (response) => {
+        toast(`The operation dislike successful!`);
         return response;
       },
     }),
@@ -76,6 +104,8 @@ export const {
   useGetAllBlogMutation,
   usePostBlogMutation,
   usePutBlogMutation,
+  useLikeBlogMutation,
+  useDislikeBlogMutation,
 } = blogsApi;
 
 // export const blogApi = createApi({
@@ -152,56 +182,56 @@ export const {
 // // auto-generated based on the defined endpoints
 // export const { useDeletBlogMutation} = delethApi
 
-export const likeApi = createApi({
-  reducerPath: "likeApi",
-  tagTypes: ["Like"], //basta hafixada tutat
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://37106.fullstack.clarusway.com/",
-  }),
-  endpoints: (builder) => ({
-    likeBlog: builder.mutation({
-      //cagiriken buun kullaniyoruy
-      query: ({ id, token }) => ({
-        url: `blogs/${id}/getLike`,
-        headers: { Authorization: `Token ${token}` },
-        method: "GET",
-      }),
-      invalidatesTags: ["Like"], //bunu yapmazan guncellme almmzdikkat
-      transformResponse: (response) => {
-        toast(`The operation was successful!`);
-        return response;
-      },
-    }),
-  }),
-});
+// export const likeApi = createApi({
+//   reducerPath: "likeApi",
+//   tagTypes: ["Like"], //basta hafixada tutat
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: "https://37106.fullstack.clarusway.com/",
+//   }),
+//   endpoints: (builder) => ({
+//     likeBlog: builder.mutation({
+//       //cagiriken buun kullaniyoruy
+//       query: ({ id, token }) => ({
+//         url: `blogs/${id}/getLike`,
+//         headers: { Authorization: `Token ${token}` },
+//         method: "GET",
+//       }),
+//       invalidatesTags: ["Like"], //bunu yapmazan guncellme almmzdikkat
+//       transformResponse: (response) => {
+//         toast(`The operation was successful!`);
+//         return response;
+//       },
+//     }),
+//   }),
+// });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useLikeBlogMutation } = likeApi;
+// // Export hooks for usage in functional components, which are
+// // auto-generated based on the defined endpoints
+// export const { useLikeBlogMutation } = likeApi;
 
-export const dislikeApi = createApi({
-  reducerPath: "dislikeApi",
-  tagTypes: ["Dislike"], //basta hafixada tutat
-  baseQuery: fetchBaseQuery({
-    baseUrl: "https://37106.fullstack.clarusway.com/",
-  }),
-  endpoints: (builder) => ({
-    dislikeBlog: builder.mutation({
-      //cagiriken buun kullaniyoruy
-      query: ({ id, token }) => ({
-        url: `blogs/${id}/postLike`,
-        headers: { Authorization: `Token ${token}` },
-        method: "POST",
-      }),
-      invalidatesTags: ["Dislike"], //bunu yapmazan guncellme almmzdikkat
-      transformResponse: (response) => {
-        toast(`The operation was successful!`);
-        return response;
-      },
-    }),
-  }),
-});
+// export const dislikeApi = createApi({
+//   reducerPath: "dislikeApi",
+//   tagTypes: ["Dislike"], //basta hafixada tutat
+//   baseQuery: fetchBaseQuery({
+//     baseUrl: "https://37106.fullstack.clarusway.com/",
+//   }),
+//   endpoints: (builder) => ({
+//     dislikeBlog: builder.mutation({
+//       //cagiriken buun kullaniyoruy
+//       query: ({ id, token }) => ({
+//         url: `blogs/${id}/postLike`,
+//         headers: { Authorization: `Token ${token}` },
+//         method: "POST",
+//       }),
+//       invalidatesTags: ["Dislike"], //bunu yapmazan guncellme almmzdikkat
+//       transformResponse: (response) => {
+//         toast(`The operation was successful!`);
+//         return response;
+//       },
+//     }),
+//   }),
+// });
 
-// Export hooks for usage in functional components, which are
-// auto-generated based on the defined endpoints
-export const { useDislikeBlogMutation } = dislikeApi;
+// // Export hooks for usage in functional components, which are
+// // auto-generated based on the defined endpoints
+// export const { useDislikeBlogMutation } = dislikeApi;

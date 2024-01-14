@@ -19,8 +19,8 @@ const pers = [
     url: "/myblog",
   },
   {
-    name: "about",
-    url: "/about",
+    name: "contact",
+    url: "/contact",
   },
 ];
 

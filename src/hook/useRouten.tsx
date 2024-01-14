@@ -40,7 +40,7 @@ const routes = [
       
     },
     {
-      path:"about",
+      path:"contact",
       element: authToken ? <About/> : <Home/>
       
     },

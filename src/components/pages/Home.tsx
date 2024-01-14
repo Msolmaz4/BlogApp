@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <div className=" h-screen bg-slate-300   dark:bg-slate-700 dark:text-black">
       <Navbar darkTheme={darkTheme} theme={theme} />
-      <div className=" dark:bg-slate-700 dark:text-black">
+      <div className=" dark:bg-slate-700 dark:text-black vh-%100">
         <HomeCarts />
       </div>
     </div>

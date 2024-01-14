@@ -4,7 +4,7 @@
 
 
 .navbar{
-    @apply   bg-red-800 text-white h-24 flex justify-between items-center  dark:bg-slate-700;
+    @apply   bg-red-800 text-white h-28 flex justify-between items-center  dark:bg-slate-700 ;
 }
 .navbar_logo{
     @apply    ml-7  dark:bg-white dark:text-black;

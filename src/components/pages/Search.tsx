@@ -1,8 +1,13 @@
-import { useState } from "react"
 
 
-const Search = ({setSearch}) => {
-    const [text,setText] = useState()
+
+
+
+const Search = ({text,setText}) => {
+
+    
+ 
+
   return (
     <div>
          <form className="group relative">
@@ -21,13 +26,15 @@ const Search = ({setSearch}) => {
           </svg>
           <input
           value={text}
-          onChange={(e)=>setSearch(e.target.value)}
+          onChange={(e)=>setText(e.target.value)}
             className="focus:ring-2 focus:ring-blue-500 focus:outline-none appearance-none w-full text-sm leading-6 text-slate-900 placeholder-slate-400 rounded-md py-2 pl-10 ring-1 ring-slate-200 shadow-sm"
             type="text"
             aria-label="Filter projects"
             placeholder="Filter Blog..."
           />
         </form>
+
+
     </div>
   )
 }

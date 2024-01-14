@@ -18,7 +18,7 @@ const Details = () => {
   const [text, setText] = useState(false);
   const authToken = localStorage.getItem("authToken");
 
-  const { data } = useGetAllBlogsQuery("");
+  const { data,refetch  } = useGetAllBlogsQuery("");
   console.log(data?.data, "details");
   const sonuc = data?.data?.filter((item) => item._id === id);
   console.log(sonuc[0]?.comments, "dddddddddddd");
@@ -41,6 +41,7 @@ const Details = () => {
           comment: inp,
         });
         console.log(response, "'''eee");
+        refetch();
       }
 
       setText(false);

@@ -5,14 +5,14 @@ import { useDislikeBlogMutation, useLikeBlogMutation } from "../../redux/blogs";
 import { useState } from "react";
 
 const Like = ({ setVeri, item ,veri}) => {
-    console.log(item._id,'likdeki')
-    console.log(veri,"likadiy")
+   // console.log(item._id,'likdeki')
+   // console.log(veri,"likadiy")
   const [dol, setDol] = useState(false);
   const [likeBlog] = useLikeBlogMutation();
   const [dislikeApi] = useDislikeBlogMutation();
   const authToken = localStorage.getItem("authToken");
   const userData = JSON.parse(localStorage.getItem("userData"));
-  console.log(userData,"likkkkk")
+ // console.log(userData,"likkkkk")
 
   
   return (
@@ -24,7 +24,7 @@ const Like = ({ setVeri, item ,veri}) => {
               deger.map((son) => {
                 if (son._id === item._id) {
                   setDol(!dol);
-                  console.log(dol, "dolllllll");
+                  //console.log(dol, "dolllllll");
                   dol
                     ? dislikeApi({ id: item._id, token: authToken })
                     : likeBlog({ id: item._id, token: authToken });

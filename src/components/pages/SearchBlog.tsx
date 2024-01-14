@@ -1,27 +1,14 @@
-import Navbar from "../Navbar/Navbar";
 import { useGetAllBlogsQuery } from "../../redux/blogs";
-import { useState } from "react";
-import { MdOutlineComment } from "react-icons/md";
-import { CiHeart } from "react-icons/ci";
-import { Link } from "react-router-dom";
 
-import { FaEye } from "react-icons/fa";
-
-const MyBlog = () => {
-  const userData = JSON.parse(localStorage.getItem("userData"));
-  const { data } = useGetAllBlogsQuery("");
-
-  const [ekran, setEKran] = useState(
-    data?.data.filter((item) => item.userId == userData._id)
-  );
- 
+const SearchBlog = () => {
+    const { data } = useGetAllBlogsQuery();
+    console.log(data ,"search")
   return (
     <div>
-      <Navbar />
-      <div className="flex gap-4 flex-wrap">
-        {ekran?.length === 0
-          ? "keine doc"
-          : ekran?.map((item, index) => (
+        <div>
+       { text.length > 1 ? (
+       data?.data?.filter((item) => item.title.toLowerCase().includes(text.toLowerCase()))
+            .map((item, index) => (
               <div
                 key={index}
                 className="bg-white p-4 rounded-md shadow-md h-[200px] w-[570px] ml-8 hover:bg-blue-200 flex "
@@ -46,19 +33,22 @@ const MyBlog = () => {
                     Published Date:{item.createdAt.slice(0, 10)}
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
-                    <div className="flex gap-4 ">
-                      <CiHeart size={24} /> {item.likes.length}
+                    <div className="flex gap-4">
+
+
+                      <Like setVeri={setVeri} item={item}  veri = {veri}/>
+
+
+                      
                       <FaEye size={24} />
                       <p>{item?.countOfVisitors}</p>
                       <MdOutlineComment size={24} />
                       <p>{item?.comments.length}</p>
                     </div>
                     <div>
-                      <Link
-                        to={`detail/${item._id}`}
-                        state={{ state: item }}
+                      <button
                         className="cta w-36 h-8 mt-[-7px]"
-                  
+                        onClick={() => hanglr(item._id)}
                       >
                         <span className="span">Read </span>
                         <span className="second">
@@ -95,15 +85,18 @@ const MyBlog = () => {
                             </g>
                           </svg>
                         </span>
-                      </Link>
+                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            ))}
-      </div>
-    </div>
-  );
-};
+            ))
+        ) :""}
 
-export default MyBlog;
+       
+        </div>
+    </div>
+  )
+}
+
+export default SearchBlog

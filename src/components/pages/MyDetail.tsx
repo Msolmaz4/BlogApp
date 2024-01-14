@@ -1,6 +1,6 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
-import { useGetAllBlogMutation ,useDeletBlogMutation } from "../../redux/blogs";
+import { useGetAllBlogMutation, useDeletBlogMutation, useGetAllBlogsQuery } from "../../redux/blogs";
 import { useEffect, useState } from "react";
 import { CiHeart } from "react-icons/ci";
 import { FaEye } from "react-icons/fa";
@@ -9,25 +9,34 @@ import UpdateModal from "./UpdateModal";
 import { toast } from "react-toastify";
 
 const MyDetail = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const { state } = useLocation();
-  console.log(state.state, "useLocation");
-  const [getAllBlog] = useGetAllBlogMutation();
-  const[delethApi] = useDeletBlogMutation()
-  const authToken = localStorage.getItem("authToken");
-  const [veri, setVeri] = useState([]);
+ 
   
- useEffect(() => {
+//  console.log(state.state, "useLocation");
+  const [getAllBlog] = useGetAllBlogMutation("");
+  const [delethApi] = useDeletBlogMutation();
+  const authToken = localStorage.getItem("authToken");
+  const {refetch  } = useGetAllBlogsQuery("");
+  const [veri, setVeri] = useState([]);
+  const [info, setInfo] = useState({
+    id: "",
+    token: "",
+  });
+
     const dert = async () => {
       const dert = await getAllBlog({ id: state.state._id, token: authToken });
-      setVeri(dert.data);
+      setVeri(dert?.data);
+      setInfo({ id: state.state._id, token: authToken });
     };
+
+  useEffect(() => {
+  
     dert();
   }, []);
-  
 
   const control = () => {
     if (authToken) {
@@ -37,11 +46,20 @@ const MyDetail = () => {
     }
   };
 
- const delet = async()=>{
- await delethApi({ id: state.state._id, token: authToken })
-   navigate('/')
- }
+  const delet = async () => {
 
+
+    await delethApi(info);
+    await  refetch();
+
+    navigate("/");
+  };
+
+  const update = async()=>{
+    await  refetch();
+    dert()
+    console.log(" byrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr")
+  }
   return (
     <div>
       <Navbar />
@@ -63,10 +81,17 @@ const MyDetail = () => {
           <MdOutlineCommentBank size={24} />{" "}
         </div>
       </div>
-      <div className="flex justify-center gap-4"> 
-      <button onClick={control}>update</button>
-      <UpdateModal show={show} handleClose={handleClose}  id={state.state._id}/>
-      <button onClick={delet}>delete</button></div>
+      <div className="flex justify-center gap-4">
+        <button onClick={control}>update</button>
+        <UpdateModal
+          show={show}
+          handleClose={handleClose}
+           update = {update}
+          state= {state?.state}
+      
+        />
+        <button onClick={delet}>delete</button>
+      </div>
     </div>
   );
 };

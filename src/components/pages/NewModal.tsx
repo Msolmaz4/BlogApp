@@ -1,11 +1,13 @@
-import { useState } from "react";
+import {  useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import { usePostBlogMutation } from "../../redux/blogs";
+import { useGetAllBlogsQuery, usePostBlogMutation } from "../../redux/blogs";
 
 const NewModal = ({ show, handleClose}) => {
     const authToken = localStorage.getItem("authToken");
+    const {refetch  } = useGetAllBlogsQuery("");
+    //const [getAllBlogs]  =useGetAllBlogsQuery()
 const [inp ,setInp] =useState({
     categoryId: "",
   title: "",
@@ -13,6 +15,7 @@ const [inp ,setInp] =useState({
   image: "",
   isPublish: ""
 })
+
  const [postBlog] = usePostBlogMutation()
 const derle = async(e)=>{
     e.preventDefault()
@@ -27,9 +30,11 @@ const derle = async(e)=>{
     })
       
       const top = await postBlog({token:authToken,categoryId:inp.categoryId ,title: inp.title, content:inp.content,image:inp.image,isPublish:inp.isPublish })
-
+     await refetch();
 console.log(top,"top")
+      
 }
+
   return (
     <div>
       <Modal show={show} onHide={handleClose}>

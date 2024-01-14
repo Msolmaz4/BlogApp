@@ -1,29 +1,44 @@
-
 import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import {  usePutBlogMutation } from "../../redux/blogs";
+import { useNavigate } from "react-router-dom";
 
+const UpdateModal = ({ show, handleClose, state, update }) => {
+  const authToken = localStorage.getItem("authToken");
 
-const UpdateModal = ({ show, handleClose, id }) => {
+  const navi = useNavigate();
+  const [putBlog] = usePutBlogMutation();
 
-  
- 
-
-const [inp, setInp] = useState({
-    title: "",
-    content:"",
-    image: "",
-    isPublish: "",
-    categoryId: "",
+  const [inp, setInp] = useState({
+    title: state.title,
+    content: state.content,
+    image: state.image,
+    isPublish: true,
+    categoryId: state?.categoryId,
   });
 
-  const derle =async()=>{
+  const handleInputChange = (e) => {
+    
+    setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }));
+  };
+  const derle = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(inp, "hadi hayirlis");
 
-  }
+    console.log(inp,"geliyorsun byaaaaaaaa")
 
+      const der = await putBlog({ id: state._id, token: authToken, data: inp });
+      console.log(der, "updateclick");
 
-
+      navi("/myblog");
+    } catch (error) {
+      console.error("Blog update error:", error);
+     
+    }
+  };
   return (
     <div>
       <Modal show={show} onHide={handleClose}>
@@ -40,9 +55,10 @@ const [inp, setInp] = useState({
                 autoFocus
                 name="title"
                 value={inp?.title}
-                onChange={(e) =>
-                  setInp({ ...inp, [e.target.name]: e.target.value })
-                }
+                // onChange={(e) =>
+                //   setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }))
+                // }
+                onChange={handleInputChange}
               />
               <Form.Label></Form.Label>
               <Form.Control
@@ -50,18 +66,18 @@ const [inp, setInp] = useState({
                 placeholder="Image URl*"
                 name="image"
                 value={inp?.image}
-                onChange={(e) =>
-                  setInp({ ...inp, [e.target.name]: e.target.value })
-                }
+                onChange={handleInputChange}
               />
               <Form.Label></Form.Label>
               <Form.Select
-                placeholder="category*"
-                name="categoryId"
-                value={inp?.categoryId}
-                onChange={(e) =>
-                  setInp({ ...inp, [e.target.name]: e.target.value })
-                }
+                 placeholder="category*"
+                 name="categoryId"
+                 value={inp?.categoryId || ""}
+                // onChange={(e) =>
+                //   //setInp({ ...inp, [e.target.name]: e.target.value })
+                //   setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }))
+                // }
+                onChange={handleInputChange}
               >
                 <option value="">Category</option>
                 <option value="659d6dd2d8aea4b25affe395">World</option>
@@ -76,9 +92,7 @@ const [inp, setInp] = useState({
                 defaultValue="draft"
                 name="isPublish"
                 value={inp?.isPublish}
-                onChange={(e) =>
-                  setInp({ ...inp, [e.target.name]: e.target.value })
-                }
+                onChange={handleInputChange}
                 placeholder="Please choose....*"
               >
                 <option value="">Please choose...</option>
@@ -97,9 +111,7 @@ const [inp, setInp] = useState({
                 style={{ resize: "none" }}
                 name="content"
                 value={inp?.content}
-                onChange={(e) =>
-                  setInp({ ...inp, [e.target.name]: e.target.value })
-                }
+                onChange={handleInputChange}
               />
             </Form.Group>
           </Form>

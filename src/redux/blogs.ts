@@ -1,71 +1,89 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
 
 // Define a service using a base URL and expected endpoints
 export const blogsApi = createApi({
-  reducerPath: 'blogsApi',
-  tagTypes: ['Blogs'],
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  reducerPath: "blogsApi",
+  tagTypes: ["Blogs"],
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://37106.fullstack.clarusway.com/",
+  }),
   endpoints: (builder) => ({
     getAllBlogs: builder.query({
       query: () => "blogs",
     }),
 
     deletBlog: builder.mutation({
-      query: ({ id, token }) => ({
-        url: `blogs/${id}`,
-        headers: { Authorization: `Token ${token}` },
-        method: 'DELETE',
+      query: (info) => ({
+        url: `blogs/${info.id}`,
+        headers: { Authorization: `Token ${info.token}` },
+        method: "DELETE",
       }),
-      invalidatesTags: ['Blogs'],
+      invalidatesTags: ["Blogs"],
       transformResponse: (response) => {
-        toast('İşlem başarılı oldu!');
+        toast("İşlem oldu!");
         return response;
       },
     }),
 
-    getAllBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+    getAllBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
       query: ({ id, token }) => ({
         url: `blogs/${id}`,
         headers: { Authorization: `Token ${token}` },
         method: "GET",
       }),
-      invalidatesTags: ["Blogs"],//bunu yapmazan guncellme almmzdikkat
+      invalidatesTags: ["Blogs"], //bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
-      
         return response;
       },
     }),
 
-    postBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
-      query: ({ token,...data }) => ({
+    postBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
+      query: ({ token, ...data }) => ({
         url: `blogs/`,
         headers: { Authorization: `Token ${token}` },
         method: "POST",
-        body:data
+        body: data,
       }),
-      invalidatesTags: ["Blogs"],//bunu yapmazan guncellme almmzdikkat
+      invalidatesTags: ["Blogs"], //bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
         toast(`The operation was successful!`);
         return response;
       },
     }),
-
-
-    
+    putBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
+      query: ({ id,token, ...data }) => ({
+        url: `blogs/${id}`,
+        headers: { Authorization: `Token ${token}` },
+        method: "PATCH",
+        body: data,
+      }),
+      invalidatesTags: ["Blogs"], //bunu yapmazan guncellme almmzdikkat
+      transformResponse: (response) => {
+        toast(`The operation was successful!`);
+        return response;
+      },
+    }),
   }),
-  
-})
+});
 
-
-export const { useGetAllBlogsQuery,useDeletBlogMutation,useGetAllBlogMutation,usePostBlogMutation } = blogsApi
+export const {
+  useGetAllBlogsQuery,
+  useDeletBlogMutation,
+  useGetAllBlogMutation,
+  usePostBlogMutation,
+  usePutBlogMutation,
+} = blogsApi;
 
 // export const blogApi = createApi({
 //   reducerPath: 'blogApi',
-//   tagTypes: ["Blog"],//basta hafixada tutat 
+//   tagTypes: ["Blog"],//basta hafixada tutat
 //   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
 //   endpoints: (builder) => ({
-//     getAllBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+//     getAllBlog: builder.mutation({  //cagiriken buun kullaniyoruy
 //       query: ({ id, token }) => ({
 //         url: `blogs/${id}`,
 //         headers: { Authorization: `Token ${token}` },
@@ -73,7 +91,7 @@ export const { useGetAllBlogsQuery,useDeletBlogMutation,useGetAllBlogMutation,us
 //       }),
 //       invalidatesTags: ["Blog"],//bunu yapmazan guncellme almmzdikkat
 //       transformResponse: (response) => {
-      
+
 //         return response;
 //       },
 //     }),
@@ -84,15 +102,12 @@ export const { useGetAllBlogsQuery,useDeletBlogMutation,useGetAllBlogMutation,us
 // // auto-generated based on the defined endpoints
 // export const { useGetAllBlogMutation} = blogApi
 
-
-
-
 // export const blApi = createApi({
 //   reducerPath: 'blApi',
-//   tagTypes: ["Bl"],//basta hafixada tutat 
+//   tagTypes: ["Bl"],//basta hafixada tutat
 //   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
 //   endpoints: (builder) => ({
-//     postBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+//     postBlog: builder.mutation({  //cagiriken buun kullaniyoruy
 //       query: ({ token,...data }) => ({
 //         url: `blogs/`,
 //         headers: { Authorization: `Token ${token}` },
@@ -112,18 +127,17 @@ export const { useGetAllBlogsQuery,useDeletBlogMutation,useGetAllBlogMutation,us
 // // auto-generated based on the defined endpoints
 // export const {usePostBlogMutation } = blApi
 
-
 // export const delethApi = createApi({
 //   reducerPath: 'delethApi',
-//   tagTypes: ["Blog"],//basta hafixada tutat 
+//   tagTypes: ["Blog"],//basta hafixada tutat
 //   baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
 //   endpoints: (builder) => ({
-//     deletBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
+//     deletBlog: builder.mutation({  //cagiriken buun kullaniyoruy
 //       query: ({ id,token}) => ({
 //         url: `blogs/${id}`,
 //         headers: { Authorization: `Token ${token}` },
 //         method: "DELETE",
-       
+
 //       }),
 //       invalidatesTags: ["Delet"],//bunu yapmazan guncellme almmzdikkat
 //       transformResponse: (response) => {
@@ -138,56 +152,56 @@ export const { useGetAllBlogsQuery,useDeletBlogMutation,useGetAllBlogMutation,us
 // // auto-generated based on the defined endpoints
 // export const { useDeletBlogMutation} = delethApi
 
-
-
-
 export const likeApi = createApi({
-  reducerPath: 'likeApi',
-  tagTypes: ["Like"],//basta hafixada tutat 
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  reducerPath: "likeApi",
+  tagTypes: ["Like"], //basta hafixada tutat
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://37106.fullstack.clarusway.com/",
+  }),
   endpoints: (builder) => ({
-    likeBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
-      query: ({ id,token}) => ({
+    likeBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
+      query: ({ id, token }) => ({
         url: `blogs/${id}/getLike`,
         headers: { Authorization: `Token ${token}` },
         method: "GET",
-       
       }),
-      invalidatesTags: ["Like"],//bunu yapmazan guncellme almmzdikkat
+      invalidatesTags: ["Like"], //bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
         toast(`The operation was successful!`);
         return response;
       },
     }),
   }),
-})
+});
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useLikeBlogMutation} = likeApi
-
+export const { useLikeBlogMutation } = likeApi;
 
 export const dislikeApi = createApi({
-  reducerPath: 'dislikeApi',
-  tagTypes: ["Dislike"],//basta hafixada tutat 
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://37106.fullstack.clarusway.com/' }),
+  reducerPath: "dislikeApi",
+  tagTypes: ["Dislike"], //basta hafixada tutat
+  baseQuery: fetchBaseQuery({
+    baseUrl: "https://37106.fullstack.clarusway.com/",
+  }),
   endpoints: (builder) => ({
-    dislikeBlog: builder.mutation({  //cagiriken buun kullaniyoruy 
-      query: ({ id,token}) => ({
+    dislikeBlog: builder.mutation({
+      //cagiriken buun kullaniyoruy
+      query: ({ id, token }) => ({
         url: `blogs/${id}/postLike`,
         headers: { Authorization: `Token ${token}` },
         method: "POST",
-       
       }),
-      invalidatesTags: ["Dislike"],//bunu yapmazan guncellme almmzdikkat
+      invalidatesTags: ["Dislike"], //bunu yapmazan guncellme almmzdikkat
       transformResponse: (response) => {
         toast(`The operation was successful!`);
         return response;
       },
     }),
   }),
-})
+});
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const {useDislikeBlogMutation } = dislikeApi
+export const { useDislikeBlogMutation } = dislikeApi;

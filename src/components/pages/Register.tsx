@@ -198,7 +198,7 @@ const Register = () => {
         className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6"
         onClick={handle}
       >
-        Button
+        Register
       </button>
     </div>
   );

@@ -7,10 +7,10 @@
     @apply   bg-red-800 text-white h-28 flex justify-between items-center  dark:bg-slate-700 ;
 }
 .navbar_logo{
-    @apply    ml-7  dark:bg-white dark:text-black;
+    @apply    ml-7  dark:bg-slate-700 dark:text-white;
 }
 .navbar_right{
-   @apply flex  gap-7 mr-7 dark:bg-white dark:text-black
+   @apply flex  gap-7 mr-7  dark:bg-slate-700 dark:text-white
 }
 .cta {
     display: flex;

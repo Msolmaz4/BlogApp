@@ -103,17 +103,19 @@ const Details = () => {
                   className="border-indigo-500/100 border-4 "
                   onChange={(e) => setInp(e.target.value)}
                 ></textarea>
-                <div>
-                  <button onClick={() => verme()}>Ekle</button>
+                <div className=" flex justify-center mt-[-9px]">
+                  <button onClick={() => verme()}  className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6">Add</button>
                 </div>
               </div>
             )}
           </div>
-          <div>
+          <div> 
+            
             {text && (
               <div>
+                <p className="flex justify-center text-2xl">Comment</p>
                 {comme?.map((item) => (
-                  <div>{item.comment}</div>
+                  <div className="border-1 border-indigo-500/100 mb-5 h-12 items-center flex ">{item.comment}</div>
                 ))}
               </div>
             )}

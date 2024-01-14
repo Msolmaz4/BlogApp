@@ -1,9 +1,25 @@
 import Navbar from "../Navbar/Navbar";
 import { useLocation } from "react-router-dom";
+import  { useState } from 'react';
 
 const About = () => {
   const location = useLocation();
   console.log(location, "useLocation");
+
+
+
+  const [to, setTo] = useState('');
+  const [subject, setSubject] = useState('');
+  const [text, setText] = useState('');
+  const sendEmail = async () => {
+    try {
+      const mailtoLink = `mailto:msolmaz83@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`;
+      window.location.href = mailtoLink;
+    } catch (error) {
+      console.error('Error sending email:', error);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -13,7 +29,7 @@ const About = () => {
           Contact
         </h2>
 
-        <form method="post" action="#">
+        <form >
           <div className="mb-4">
             <label
               className="block text-sm font-medium text-gray-600"
@@ -21,7 +37,7 @@ const About = () => {
             >
               Full Name
             </label>
-            <input className="mt-1 p-2 w-full border rounded-md" type="text" />
+            <input className="mt-1 p-2 w-full border rounded-md"  type="text" value={to} onChange={(e) => setTo(e.target.value)} />
           </div>
 
           <div className="mb-4">
@@ -35,14 +51,14 @@ const About = () => {
               className="mt-1 p-2 w-full border rounded-md"
               name="email"
               id="email"
-              type="email"
+              type="email" value={subject} onChange={(e) => setSubject(e.target.value)}
             />
           </div>
 
           <div className="mb-4">
             <label
               className="block text-sm font-medium text-gray-600"
-              for="bio"
+              htmlFor="bio"
             >
               Messaj
             </label>
@@ -51,19 +67,26 @@ const About = () => {
               rows="3"
               name="bio"
               id="bio"
+              value={text} onChange={(e) => setText(e.target.value)} 
             ></textarea>
           </div>
 
           <div className="flex justify-end">
             <button
               className="[background:linear-gradient(144deg,#af40ff,#5b42f3_50%,#00ddeb)] text-white px-4 py-2 font-bold rounded-md hover:opacity-80"
-              type="submit"
+              type="submit" onClick={sendEmail}
+             
             >
-              Send
+              Send Email
             </button>
           </div>
         </form>
       </div>
+
+
+     
+
+      
     </div>
   );
 };

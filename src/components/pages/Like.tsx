@@ -1,19 +1,25 @@
 import { CiHeart, CiVolumeHigh } from "react-icons/ci";
 import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa";
-import { useDislikeBlogMutation, useLikeBlogMutation } from "../../redux/blogs";
-import { useState } from "react";
+import { useDislikeBlogMutation, useGetAllBlogsQuery, useLikeBlogMutation } from "../../redux/blogs";
+import { useEffect, useState } from "react";
 
-const Like = ({ setVeri, item ,veri}) => {
+const Like = ({ setVeri, item }) => {
    // console.log(item._id,'likdeki')
    // console.log(veri,"likadiy")
   const [dol, setDol] = useState(false);
   const [likeBlog,{data}] = useLikeBlogMutation();
   const [dislikeApi] = useDislikeBlogMutation();
   const authToken = localStorage.getItem("authToken");
-  const userData = JSON.parse(localStorage.getItem("userData"));
- // console.log(userData,"likkkkk")
-console.log(data,"like")
+  const {refetch  } = useGetAllBlogsQuery("");
+
+  useEffect(()=>{
+const gun = async()=>{
+  await refetch()
+}
+gun()
+  },[dol])
+
   
   return (
     <div>

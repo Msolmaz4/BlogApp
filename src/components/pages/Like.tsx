@@ -1,4 +1,4 @@
-import { CiHeart, CiVolumeHigh } from "react-icons/ci";
+import { CiHeart } from "react-icons/ci";
 import { toast } from "react-toastify";
 import { FaHeart } from "react-icons/fa";
 import { useDislikeBlogMutation, useGetAllBlogsQuery, useLikeBlogMutation } from "../../redux/blogs";

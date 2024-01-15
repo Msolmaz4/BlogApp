@@ -34,7 +34,6 @@ const MyDetail = () => {
     };
 
   useEffect(() => {
-  
     dert();
   }, []);
 
@@ -47,11 +46,8 @@ const MyDetail = () => {
   };
 
   const delet = async () => {
-
-
     await delethApi(info);
     await  refetch();
-
     navigate("/");
   };
 

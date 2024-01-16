@@ -1,0 +1,25 @@
+vitest sayfasinda vitest tesy=t uklendi 
+doc
+viteconfig ts atatlandi /// <reference types="vitest" />
+import { defineConfig } from 'vite'
+
+export default defineConfig({
+  test: {
+    // ...
+  },
+})
+npm i jsdom yukldeik 
+
+vitecofing boyle ataldik
+// <reference types="vitest" />
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+  environment:"jsdom"
+  },
+})

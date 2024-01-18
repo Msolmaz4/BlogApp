@@ -49,8 +49,6 @@ export const commentApi = createApi({
 
 export const { useGetcommentMutation } = commentApi;
 
-
-
 export const commApi = createApi({
   reducerPath: "commApi",
   tagTypes: ["Comm"],
@@ -59,12 +57,11 @@ export const commApi = createApi({
   }),
   endpoints: (builder) => ({
     postcomment: builder.mutation({
-      query: ( {token,...data}) => ({
+      query: ({ token, ...data }) => ({
         url: `comments/`,
         headers: { Authorization: `Token ${token}` },
         method: "POST",
-        body:data
-       
+        body: data,
       }),
       invalidatesTags: ["Comm"],
       transformResponse: (response) => {
@@ -75,19 +72,7 @@ export const commApi = createApi({
   }),
 });
 
-export const { usePostcommentMutation} = commApi;
-
-
-
-
-
-
-
-
-
-
-
-
+export const { usePostcommentMutation } = commApi;
 
 // import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 // import { toast } from "react-toastify";

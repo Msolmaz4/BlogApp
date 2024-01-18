@@ -4,10 +4,7 @@ import { CiDark } from "react-icons/ci";
 import { useState } from "react";
 import { useLogoutMutation } from "../../redux/auth";
 
-interface In {
-  darkTheme(): string;
-  theme: string;
-}
+
 
 const pers = [
   {

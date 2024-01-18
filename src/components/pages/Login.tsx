@@ -4,21 +4,25 @@ import { useLogMutation } from "../../redux/auth";
 import { toast } from "react-toastify";
 
 const Login = () => {
-  const navigate = useNavigate();
   const [isPasswordHidden, setPasswordHidden] = useState(true);
-  const [log] = useLogMutation();
+
   const [int, setInt] = useState({
     username: "",
     password: "",
   });
 
+  const navigate = useNavigate();
+  const [log] = useLogMutation();
   const handle1 = async () => {
     try {
-      const rest = await log(int);
+      //const rest :ApiResponse = await log(int);
+
+      const restPromise: Promise<ApiResponse> = log(int);
+      const rest: ApiResponse = await restPromise;
 
       console.log(rest);
-      const token = rest?.data.token;
-      const user = rest?.data.user;
+      const token = rest?.data?.token;
+      const user = rest?.data?.user;
       if (rest?.error?.data.error === true) {
         toast(rest?.error.data.message);
       } else {
@@ -102,10 +106,11 @@ const Login = () => {
         </div>
       </div>
       <p className="mt-3">
-        Don't have an account?{" "}
+        Don't have an account?
         <button onClick={() => navigate("/register")}>Sign Up</button>
       </p>
       <button
+        data-testId="container"
         onClick={handle1}
         className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6"
       >

@@ -6,7 +6,7 @@ export const blogsApi = createApi({
   reducerPath: "blogsApi",
   tagTypes: ["Blogs"],
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL,
+    baseUrl: "https://37106.fullstack.clarusway.com/",
   }),
   endpoints: (builder) => ({
     getAllBlogs: builder.query({

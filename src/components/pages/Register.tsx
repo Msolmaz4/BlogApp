@@ -7,8 +7,8 @@ const Register = () => {
   const navigate = useNavigate();
   const [register] = useRegisterMutation(); //neden boyle yaptik hocam
 
-  const [isPasswordHidden, setPasswordHidden] = useState(true);
-  const [inp, setInp] = useState({
+  const [isPasswordHidden, setPasswordHidden] = useState<boolean>(true);
+  const [inp, setInp] = useState<RegisterIn>({
     username: "",
     firstName: "",
     lastName: "",
@@ -18,7 +18,7 @@ const Register = () => {
     password: "",
   });
   const handle = async () => {
-    console.log(inp);
+    
     try {
       const result = await register(inp);
       console.log(result);

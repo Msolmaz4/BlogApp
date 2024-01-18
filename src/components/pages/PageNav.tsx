@@ -12,7 +12,7 @@ const PageNav = ({ setPage, page }) => {
       )}
       {page + count}
       <div className="gap-2">
-        <button onClick={() => setPage(page + 1)}> ++</button>{" "}
+        <button onClick={() => setPage(page + 1)}>A ++</button>{" "}
       </div>
     </div>
   );

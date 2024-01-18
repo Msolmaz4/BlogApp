@@ -58,7 +58,6 @@ const MyBlog = () => {
                         to={`detail/${item._id}`}
                         state={{ state: item }}
                         className="cta w-36 h-8 mt-[-7px]"
-                  
                       >
                         <span className="span">Read </span>
                         <span className="second">

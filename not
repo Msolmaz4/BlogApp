@@ -23,3 +23,30 @@ export default defineConfig({
   environment:"jsdom"
   },
 })
+sonra vitest ui kurduk consolda gormemsini saglayacak
+package.json gifdip degsiklik yapipruyz
+"test": "vitest --ui",
+sonra 
+bir key daga gubcelledik
+/// <reference types="vitest" />
+/// <reference types="vite/client" />
+
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  test: {
+  environment:"jsdom",
+  globals:true
+  },
+})
+https://vitest.dev/config/#globals bu dokuman inceledim bulamayuzzca getting stsrt arama yaptim tyscript  zaydimh
+config otioms global setup secrtim
+
+ttps://vitest.dev/config/#globalsetup
+buradaki siramadan gittim ilk siradia true saten yapmistim 
+"types": ["vitest/globals"]
+sonra libaray dic  
+npm install --save-dev @testing-library/react

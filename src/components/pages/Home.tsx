@@ -5,7 +5,7 @@ import HomeCarts from "./HomeCarts";
 const Home = () => {
   const [theme, setTheme] = useState<string>("light");
 
-  const darkTheme = () => {
+  const darkTheme : In['darkTheme']= () => {
     setTheme(theme === "light" ? "dark" : "light");
     if (theme === "dark") {
       document.documentElement.classList.add("dark");

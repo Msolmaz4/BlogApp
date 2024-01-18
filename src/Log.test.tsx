@@ -1,7 +1,12 @@
-import {describe,expect,test} from "vitest"
+import { describe, test } from "vitest";
+import { render, } from "@testing-library/react";
 
-describe("der",()=>{
-  test("dertleme",()=>{
-    expect(1+1).toBe(2)
-  })
-})
+import Login from "./components/pages/Login";
+
+describe("der", () => {
+  test("dertleme", () => {
+    render(<Login/>);
+   
+    
+  });
+});

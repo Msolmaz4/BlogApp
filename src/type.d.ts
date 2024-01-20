@@ -55,3 +55,21 @@ interface User {
     bio: string,
     password: string,
   }
+
+  interface Blogs {
+    error:boolean,
+    details: Details,
+    data:Data,
+  }
+
+  interface Details {
+    filter:string,
+    limit:number,
+    page:number,
+    pages:boolean,
+    search:string,
+    skip:number,
+    sort:string
+   totalRecords: number,
+
+   }

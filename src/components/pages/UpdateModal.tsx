@@ -4,6 +4,16 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import {  usePutBlogMutation } from "../../redux/blogs";
 import { useNavigate } from "react-router-dom";
+import { ChangeEvent } from "react";
+
+interface FormInput {
+  categoryId?: string; 
+  placeholder:string;
+  title:string;
+  content:string;
+  image:string;
+ 
+}
 
 const UpdateModal = ({ show, handleClose, state, update }) => {
   const authToken = localStorage.getItem("authToken");
@@ -11,7 +21,7 @@ const UpdateModal = ({ show, handleClose, state, update }) => {
   const navi = useNavigate();
   const [putBlog] = usePutBlogMutation();
 
-  const [inp, setInp] = useState({
+  const [inp, setInp] = useState<FormInput>({
     title: state.title,
     content: state.content,
     image: state.image,
@@ -19,11 +29,11 @@ const UpdateModal = ({ show, handleClose, state, update }) => {
     categoryId: state?.categoryId,
   });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLSelectElement>) => {
     
     setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }));
   };
-  const derle = async (e) => {
+  const derle = async (e: ChangeEvent<HTMLSelectElement>) => {
     e.preventDefault();
     try {
       console.log(inp, "hadi hayirlis");

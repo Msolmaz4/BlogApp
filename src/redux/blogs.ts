@@ -1,12 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { toast } from "react-toastify";
 
+
 // Define a service using a base URL and expected endpoints
 export const blogsApi = createApi({
   reducerPath: "blogsApi",
   tagTypes: ["Blogs"],
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://37106.fullstack.clarusway.com/",
+    baseUrl: import.meta.env.VITE_BASE_URL,
   }),
   endpoints: (builder) => ({
     getAllBlogs: builder.query({

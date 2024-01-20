@@ -9,8 +9,26 @@ import NewProduct from "./NewProduct";
 import PageNav from "./PageNav";
 import Like from "./Like";
 
+interface Blog {
+  _id: string;
+  title: string;
+  content: string;
+  image: string;
+  createdAt: string;
+  countOfVisitors: number;
+  comments: string[];
+}
+
+interface BlogsResponse {
+  data: Blog[];
+  isLoading:boolean;
+  
+}
+
+
 const HomeCarts = () => {
-  const { data, isLoading } = useGetAllBlogsQuery("");
+  const { data, isLoading } = useGetAllBlogsQuery("") as BlogsResponse;
+  console.log(data)
 
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);
@@ -23,7 +41,7 @@ const HomeCarts = () => {
 
   useEffect(() => {
     const dert = async () => {
-      if (data?.data.length > 8) {
+      if (data?.data.length  > 8) {
         const durum = await data?.data?.slice(
           (page - 1) * 8,
           (page - 1) * 8 + 8
@@ -59,7 +77,7 @@ const HomeCarts = () => {
 
         <Search text={text} setText={setText} />
       </header>
-      <div className="grid gap-4 grid-cols-3 grid-rows-3">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
         {isLoading ? (
           <button type="button" className="bg-indigo-500 ..." disabled>
             <svg

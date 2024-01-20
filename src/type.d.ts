@@ -54,6 +54,7 @@ interface User {
     image: string,
     bio: string,
     password: string,
+    
   }
 
   interface Blogs {
@@ -73,3 +74,39 @@ interface User {
    totalRecords: number,
 
    }
+
+
+   interface Register {
+    bio: string;
+    createdAt: string;
+    email: string;
+    firstName: string;
+    image: string;
+    isActive: boolean;
+    isAdmin: boolean;
+    isStaff: boolean;
+    lastName: string;
+    password: string;
+    updatedAt: string;
+    username: string;
+    __v: number;
+    _id: string;
+  }
+  
+  interface ErrorResponse {
+    status: number;
+    data: {
+      error: boolean;
+      message: string;
+    };
+  }
+  
+  
+  
+  
+  interface MutationResult {
+    data?: Register;
+    error?: ErrorResponse;
+    token?: string;
+  }
+  

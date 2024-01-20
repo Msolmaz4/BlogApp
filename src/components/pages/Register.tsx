@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { useRegisterMutation } from "../../redux/auth";
 import { toast } from "react-toastify";
 
-const Register = () => {
+
+
+
+const Register:React.FC = () => {
   const navigate = useNavigate();
   const [register] = useRegisterMutation(); //neden boyle yaptik hocam
 
@@ -17,10 +20,10 @@ const Register = () => {
     bio: "",
     password: "",
   });
-  const handle = async () => {
+  const handle = async (): Promise<void> => {
     
     try {
-      const result = await register(inp);
+      const result: MutationResult = await register(inp);
       console.log(result);
       if (result?.error?.data.error === true) {
         toast(result.error.data.message);

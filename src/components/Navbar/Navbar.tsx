@@ -21,7 +21,7 @@ const pers = [
   },
 ];
 
-const Navbar = ({ darkTheme, theme }: In) => {
+const Navbar:React.FC<In> = ({ darkTheme, theme }) => {
   const [open, setOpen] = useState<boolean>(false);
   const authToken = localStorage.getItem("authToken");
 

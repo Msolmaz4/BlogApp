@@ -62,6 +62,8 @@ const Navbar:React.FC<In> = ({ darkTheme, theme }) => {
               {pers?.map((item) => (
                 <NavLink
                   onClick={() => hand3(item.name)}
+                  darkTheme ={darkTheme}
+                  theme={theme}
                   key={item.name}
                   to={item.url}
                   className="block px-4 py-2 text-sm text-black dark:text-white"

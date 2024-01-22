@@ -6,7 +6,7 @@ const NewProduct = () => {
   const [show, setShow] = useState(false);
   const authToken = localStorage.getItem("authToken");
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow  = () => setShow(true);
 
   const control = () => {
     if (authToken) {

@@ -16,7 +16,7 @@ interface Item {
   _id:string,
 }
 
-const Details:React.FC = () => {
+const Details:React.FC<In> = ({ darkTheme, theme }) => {
   const { id } = useParams();
   console.log(id);
   const [text, setText] = useState(false);
@@ -66,7 +66,7 @@ const Details:React.FC = () => {
 
   return (
     <div>
-      <Navbar />
+        <Navbar darkTheme={darkTheme} theme={theme} />
       {sonuc.map((item) => (
         <div className="border-4 border-indigo-500/100">
           <p>{item.title}</p>

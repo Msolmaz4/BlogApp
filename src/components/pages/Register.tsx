@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 const Register:React.FC = () => {
   const navigate = useNavigate();
-  const [register] = useRegisterMutation(); //neden boyle yaptik hocam
+  const [register] = useRegisterMutation(); 
 
   const [isPasswordHidden, setPasswordHidden] = useState<boolean>(true);
   const [inp, setInp] = useState<RegisterIn>({

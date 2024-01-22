@@ -8,7 +8,7 @@ import { MdOutlineCommentBank } from "react-icons/md";
 import UpdateModal from "./UpdateModal";
 import { toast } from "react-toastify";
 
-const MyDetail = () => {
+const MyDetail:React.FC<In> = ({ darkTheme, theme }) => {
   const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -58,7 +58,7 @@ const MyDetail = () => {
   }
   return (
     <div>
-      <Navbar />
+      <Navbar darkTheme={darkTheme} theme={theme} />
       <div className="border-4 border-indigo-500/100">
         <p>{state.state.title}</p>
         <div className=" h-[260px] w-[400px]">

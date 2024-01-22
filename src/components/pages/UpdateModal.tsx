@@ -12,7 +12,7 @@ interface FormInput {
   title:string;
   content:string;
   image:string;
-  isPublish:boolean;
+  
  
 }
 

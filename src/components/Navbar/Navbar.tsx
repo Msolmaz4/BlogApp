@@ -24,6 +24,7 @@ const pers = [
 const Navbar:React.FC<In> = ({ darkTheme, theme }) => {
   const [open, setOpen] = useState<boolean>(false);
   const authToken = localStorage.getItem("authToken");
+  console.log(theme)
 
   const [logout] = useLogoutMutation();
   const hand3 = (name: string) => {
@@ -62,8 +63,7 @@ const Navbar:React.FC<In> = ({ darkTheme, theme }) => {
               {pers?.map((item) => (
                 <NavLink
                   onClick={() => hand3(item.name)}
-                  darkTheme ={darkTheme}
-                  theme={theme}
+              
                   key={item.name}
                   to={item.url}
                   className="block px-4 py-2 text-sm text-black dark:text-white"

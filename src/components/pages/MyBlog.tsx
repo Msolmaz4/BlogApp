@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 
 const MyBlog:React.FC<In>= ( { darkTheme, theme }) => {
+  console.log(theme,"themeeee")
   const userData = JSON.parse(localStorage.getItem("userData"));
   const { data } = useGetAllBlogsQuery("");
 
@@ -20,7 +21,7 @@ const MyBlog:React.FC<In>= ( { darkTheme, theme }) => {
       <Navbar darkTheme={darkTheme} theme={theme} />
       <div className="flex gap-4 flex-wrap">
         {ekran?.length === 0
-          ? "keine doc"
+          ? (<div className="dark:bg-black"> <p>Keine Doc</p></div>)
           : ekran?.map((item, index) => (
               <div
                 key={index}

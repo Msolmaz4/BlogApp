@@ -12,6 +12,7 @@ interface FormInput {
   title:string;
   content:string;
   image:string;
+  isPublish:boolean;
  
 }
 
@@ -33,7 +34,7 @@ const UpdateModal = ({ show, handleClose, state, update }) => {
     
     setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }));
   };
-  const derle = async (e: ChangeEvent<HTMLSelectElement>) => {
+  const derle = async (e: ChangeEvent<HTMLSelectElement>):Promise<void> => {
     e.preventDefault();
     try {
       console.log(inp, "hadi hayirlis");

@@ -1,15 +1,13 @@
 import Navbar from "../Navbar/Navbar";
-import { useLocation } from "react-router-dom";
 import { useState } from "react";
 
-const About = () => {
-  const location = useLocation();
-  console.log(location, "useLocation");
+const About:React.FC = () => {
 
-  const [to, setTo] = useState("");
-  const [subject, setSubject] = useState("");
-  const [text, setText] = useState("");
-  const sendEmail = async () => {
+
+  const [to, setTo] = useState<string>("");
+  const [subject, setSubject] = useState<string>("");
+  const [text, setText] = useState<string>("");
+  const sendEmail = async () :Promise<void>=> {
     try {
       const mailtoLink = `mailto:msolmaz83@gmail.com?subject=${encodeURIComponent(
         subject

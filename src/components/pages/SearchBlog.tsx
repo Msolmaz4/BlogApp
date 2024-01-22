@@ -1,7 +1,10 @@
+import { FaEye } from "react-icons/fa";
 import { useGetAllBlogsQuery } from "../../redux/blogs";
+import { MdOutlineComment } from "react-icons/md";
+import Like from "./Like";
 
 const SearchBlog = () => {
-  const { data } = useGetAllBlogsQuery();
+  const { data } = useGetAllBlogsQuery("");
   console.log(data, "search");
   return (
     <div>

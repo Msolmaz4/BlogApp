@@ -28,7 +28,7 @@ interface BlogsResponse {
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("") as BlogsResponse;
-  console.log(data)
+  //console.log(data)
 
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);

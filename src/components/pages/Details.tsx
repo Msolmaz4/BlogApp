@@ -12,7 +12,11 @@ import {
   usePostcommentMutation,
 } from "../../redux/comments";
 
-const Details = () => {
+interface Item {
+  _id:string,
+}
+
+const Details:React.FC = () => {
   const { id } = useParams();
   console.log(id);
   const [text, setText] = useState(false);
@@ -20,7 +24,7 @@ const Details = () => {
 
   const { data,refetch  } = useGetAllBlogsQuery("");
   console.log(data?.data, "details");
-  const sonuc = data?.data?.filter((item) => item._id === id);
+  const sonuc = data?.data?.filter((item : Item) => item._id === id );
   console.log(sonuc[0]?.comments, "dddddddddddd");
 
   const [inp, setInp] = useState("");
@@ -29,7 +33,7 @@ const Details = () => {
   const [getAllBlog] = useGetAllBlogMutation();
   const [comme, setCommen] = useState("");
 
-  const verme = async () => {
+  const verme = async ():Promise<void> => {
     try {
       if (inp.length > 1) {
         const res = await getcomments(authToken);

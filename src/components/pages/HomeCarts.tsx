@@ -28,8 +28,9 @@ interface BlogsResponse {
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("") as BlogsResponse;
-  //console.log(data)
-
+  console.log(data?.data)
+const ter = [...data?.data].reverse()
+console.log(ter)
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);
 
@@ -42,7 +43,7 @@ const HomeCarts = () => {
   useEffect(() => {
     const dert = async () => {
       if (data?.data.length  > 8) {
-        const durum = await data?.data?.slice(
+        const durum = await ter.slice(
           (page - 1) * 8,
           (page - 1) * 8 + 8
         );

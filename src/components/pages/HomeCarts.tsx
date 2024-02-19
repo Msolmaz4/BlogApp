@@ -29,7 +29,7 @@ interface BlogsResponse {
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("") as BlogsResponse;
   //console.log(data?.data)
-const ter = [...data?.data].reverse()
+  const ter = data?.data ? [...data.data].reverse() : [];
 //console.log(ter)
   const [veri, setVeri] = useState([]);
   const [page, SetPage] = useState<number>(1);
@@ -38,11 +38,13 @@ const ter = [...data?.data].reverse()
 
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
-  const userData = JSON.parse(localStorage.getItem("userData"));
+  const storedData = localStorage.getItem("userData");
+  const userDat = storedData ? JSON.parse(storedData) : null;
+  console.log(userDat)
 
   useEffect(() => {
     const dert = async () => {
-      if (data?.data.length  > 8) {
+      if (data?.data?.length  > 8) {
         const durum = await ter.slice(
           (page - 1) * 8,
           (page - 1) * 8 + 8
@@ -51,6 +53,7 @@ const ter = [...data?.data].reverse()
       }
     };
     dert();
+
   }, [data, page, text]);
 
   const hanglr = (id: string) => {
@@ -66,13 +69,11 @@ const ter = [...data?.data].reverse()
       <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-slate-900">
-            {userData ? (
+            {userDat && 
               <div className="dark:text-gray-100">
-                kullanici ismi : {userData?.firstName}
+                kullanici ismi : {userDat?.firstName}
               </div>
-            ) : (
-              ""
-            )}
+           }
           </h2>
         </div>
 

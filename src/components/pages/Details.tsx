@@ -13,19 +13,19 @@ import {
 } from "../../redux/comments";
 
 interface Item {
-  _id:string,
+  _id: string;
 }
 
-const Details:React.FC<In> = ({ darkTheme, theme }) => {
+const Details: React.FC<In> = ({ darkTheme, theme }) => {
   const { id } = useParams();
-  console.log(id);
+  //console.log(id);
   const [text, setText] = useState(false);
   const authToken = localStorage.getItem("authToken");
 
-  const { data,refetch  } = useGetAllBlogsQuery("");
-  console.log(data?.data, "details");
-  const sonuc = data?.data?.filter((item : Item) => item._id === id );
-  console.log(sonuc[0]?.comments, "dddddddddddd");
+  const { data, refetch } = useGetAllBlogsQuery("");
+  //console.log(data?.data, "details");
+  const sonuc = data?.data?.filter((item: Item) => item._id === id);
+  //console.log(sonuc[0]?.comments, "dddddddddddd");
 
   const [inp, setInp] = useState("");
   const [getcomments, { data: commentsData }] = useGetcommentsMutation();
@@ -33,32 +33,32 @@ const Details:React.FC<In> = ({ darkTheme, theme }) => {
   const [getAllBlog] = useGetAllBlogMutation();
   const [comme, setCommen] = useState("");
 
-  const verme = async ():Promise<void> => {
+  const verme = async (): Promise<void> => {
     try {
       if (inp.length > 1) {
         const res = await getcomments(authToken);
-        console.log(commentsData, "alladata");
-        console.log(res?.data?.data, "ttttttttttt");
+        //console.log(commentsData, "alladata");
+       // console.log(res?.data?.data, "ttttttttttt");
         const response = await postcomment({
           token: authToken,
           blogId: id,
           comment: inp,
         });
-        console.log(response, "'''eee");
+        //console.log(response, "'''eee");
         refetch();
       }
 
       setText(false);
       setInp("");
     } catch (error) {
-      console.log(error);
+      //console.log(error);
     }
   };
 
   useEffect(() => {
     const erst = async () => {
       const fikir = await getAllBlog({ authToken, id });
-      console.log(fikir?.data?.data?.comments, "errrrrrrrrrrrrrrrrrrrrrrrrrr");
+      //console.log(fikir?.data?.data?.comments, "errrrrrrrrrrrrrrrrrrrrrrrrrr");
       setCommen(fikir?.data?.data?.comments);
     };
     erst();
@@ -66,7 +66,7 @@ const Details:React.FC<In> = ({ darkTheme, theme }) => {
 
   return (
     <div>
-        <Navbar darkTheme={darkTheme} theme={theme} />
+      <Navbar darkTheme={darkTheme} theme={theme} />
       {sonuc.map((item) => (
         <div className="border-4 border-indigo-500/100">
           <p>{item.title}</p>
@@ -108,18 +108,24 @@ const Details:React.FC<In> = ({ darkTheme, theme }) => {
                   onChange={(e) => setInp(e.target.value)}
                 ></textarea>
                 <div className=" flex justify-center mt-[-9px]">
-                  <button onClick={() => verme()}  className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6">Add</button>
+                  <button
+                    onClick={() => verme()}
+                    className="px-6 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-6"
+                  >
+                    Add
+                  </button>
                 </div>
               </div>
             )}
           </div>
-          <div> 
-            
+          <div>
             {text && (
               <div>
                 <p className="flex justify-center text-2xl">Comment</p>
                 {comme?.map((item) => (
-                  <div className="border-1 border-indigo-500/100 mb-5 h-12 items-center flex ">{item.comment}</div>
+                  <div className="border-1 border-indigo-500/100 mb-5 h-12 items-center flex ">
+                    {item.comment}
+                  </div>
                 ))}
               </div>
             )}

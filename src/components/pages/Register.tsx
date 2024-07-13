@@ -45,7 +45,9 @@ const Register: React.FC = () => {
       <div className="flex gap-5">
         <div>
           <div>
-            <label  className="text-black-800 text-xl flex justify-center">User</label>
+            <label className="text-black-800 text-xl flex justify-center">
+              User
+            </label>
             <div className="relative max-w-xs mt-2">
               <input
                 type="text"
@@ -60,7 +62,9 @@ const Register: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className="text-black-800 text-xl flex justify-center mt-3">First Name</label>
+            <label className="text-black-800 text-xl flex justify-center mt-3">
+              First Name
+            </label>
             <div className="relative max-w-xs mt-2">
               <input
                 type="text"
@@ -75,7 +79,9 @@ const Register: React.FC = () => {
             </div>
           </div>
           <div className="">
-            <label  className="text-black-800 text-xl flex justify-center mt-3">Last Name</label>
+            <label className="text-black-800 text-xl flex justify-center mt-3">
+              Last Name
+            </label>
             <div className="relative max-w-xs mt-2">
               <input
                 type="text"
@@ -90,7 +96,9 @@ const Register: React.FC = () => {
             </div>
           </div>
           <div>
-            <label className="text-black-800 text-xl flex justify-center mt-3">Email</label>
+            <label className="text-black-800 text-xl flex justify-center mt-3">
+              Email
+            </label>
             <div className="relative max-w-xs mt-2">
               <input
                 type="text"
@@ -108,7 +116,9 @@ const Register: React.FC = () => {
 
         <div>
           <div>
-            <label  className="text-black-800 text-xl flex justify-center">Image</label>
+            <label className="text-black-800 text-xl flex justify-center">
+              Image
+            </label>
             <div className="relative max-w-xs mt-2">
               <input
                 type="text"
@@ -123,7 +133,9 @@ const Register: React.FC = () => {
             </div>
           </div>
           <div>
-            <label  className="text-black-800 text-xl flex justify-center mt-3">Bio</label>
+            <label className="text-black-800 text-xl flex justify-center mt-3">
+              Bio
+            </label>
             <div className="relative max-w-xs mt-2">
               <input
                 type="text"
@@ -139,7 +151,9 @@ const Register: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-black-800 text-xl flex justify-center mt-3">Password</label>
+            <label className="text-black-800 text-xl flex justify-center mt-3">
+              Password
+            </label>
             <div className="relative max-w-xs mt-2">
               <button
                 className="text-gray-400 absolute right-3 inset-y-0 my-auto active:text-gray-600"
@@ -194,28 +208,27 @@ const Register: React.FC = () => {
               />
             </div>
           </div>
-          <p  className="text-black-800  flex justify-center mt-4">
+          <p className="text-black-800  flex justify-center mt-4">
             Don't have an account?{" "}
             <button onClick={() => navigate("/login")}>Sign In</button>
           </p>
-        
         </div>
-         
-      </div> 
-      <div className="flex"> 
-      <button
-            data-testId="container"
-            onClick={() => navigate("/")}
-            className="px-3 py-2 mr-6 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-9"
-          >
-            Home
-          </button>
-      <button
-            className="px-16 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-9"
-            onClick={handle}
-          >
-            Register
-          </button></div>
+      </div>
+      <div className="flex">
+        <button
+          data-testId="container"
+          onClick={() => navigate("/")}
+          className="px-3 py-2 mr-6 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-9"
+        >
+          Home
+        </button>
+        <button
+          className="px-16 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-9"
+          onClick={handle}
+        >
+          Register
+        </button>
+      </div>
     </div>
   );
 };

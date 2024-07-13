@@ -78,7 +78,12 @@ const Navbar: React.FC<In> = ({ darkTheme, theme }) => {
           )}
           {!authToken && open ? (
             <div>
-              <NavLink to="/login">login</NavLink>
+              <div>
+                <NavLink to="/login">Login</NavLink>{" "}
+              </div>
+              <div>
+                <NavLink to="/register">Register</NavLink>
+              </div>
             </div>
           ) : (
             ""

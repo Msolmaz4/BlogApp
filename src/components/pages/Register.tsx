@@ -201,12 +201,21 @@ const Register: React.FC = () => {
         
         </div>
          
-      </div> <button
+      </div> 
+      <div className="flex"> 
+      <button
+            data-testId="container"
+            onClick={() => navigate("/")}
+            className="px-3 py-2 mr-6 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-9"
+          >
+            Home
+          </button>
+      <button
             className="px-16 py-3 text-white duration-100 bg-indigo-600 rounded-lg shadow-md focus:shadow-none ring-offset-2 ring-indigo-600 focus:ring-2 mt-9"
             onClick={handle}
           >
             Register
-          </button>
+          </button></div>
     </div>
   );
 };

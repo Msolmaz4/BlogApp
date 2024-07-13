@@ -2,18 +2,16 @@ import { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
-import {  usePutBlogMutation } from "../../redux/blogs";
+import { usePutBlogMutation } from "../../redux/blogs";
 import { useNavigate } from "react-router-dom";
 import { ChangeEvent } from "react";
 
 interface FormInput {
-  categoryId?: string; 
-  placeholder:string;
-  title:string;
-  content:string;
-  image:string;
-  
- 
+  categoryId?: string;
+  placeholder: string;
+  title: string;
+  content: string;
+  image: string;
 }
 
 const UpdateModal = ({ show, handleClose, state, update }) => {
@@ -31,23 +29,21 @@ const UpdateModal = ({ show, handleClose, state, update }) => {
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    
     setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }));
   };
-  const derle = async (e: ChangeEvent<HTMLSelectElement>):Promise<void> => {
+  const derle = async (e: ChangeEvent<HTMLSelectElement>): Promise<void> => {
     e.preventDefault();
     try {
       console.log(inp, "hadi hayirlis");
 
-    console.log(inp,"geliyorsun byaaaaaaaa")
+      console.log(inp, "geliyorsun byaaaaaaaa");
 
       const der = await putBlog({ id: state._id, token: authToken, data: inp });
       console.log(der, "updateclick");
-update()
+      update();
       navi("/");
     } catch (error) {
       console.error("Blog update error:", error);
-     
     }
   };
   return (
@@ -81,9 +77,9 @@ update()
               />
               <Form.Label></Form.Label>
               <Form.Select
-                 placeholder="category*"
-                 name="categoryId"
-                 value={inp?.categoryId || ""}
+                placeholder="category*"
+                name="categoryId"
+                value={inp?.categoryId || ""}
                 // onChange={(e) =>
                 //   //setInp({ ...inp, [e.target.name]: e.target.value })
                 //   setInp((prevInp) => ({ ...prevInp, [e.target.name]: e.target.value }))

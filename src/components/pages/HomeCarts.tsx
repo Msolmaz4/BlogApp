@@ -38,7 +38,7 @@ const HomeCarts = () => {
   const authToken = localStorage.getItem("authToken");
   const storedData = localStorage.getItem("userData");
   const userDat = storedData ? JSON.parse(storedData) : null;
-  console.log(userDat);
+  //console.log(userDat);
 
   useEffect(() => {
     const dert = async () => {
@@ -73,7 +73,7 @@ const HomeCarts = () => {
 
         <Search text={text} setText={setText} />
       </header>
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
         {isLoading ? (
           <button type="button" className="bg-indigo-500 ..." disabled>
             <svg
@@ -90,7 +90,7 @@ const HomeCarts = () => {
             .map((item, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-md shadow-md h-[200px] w-[570px] ml-8 hover:bg-blue-200 flex "
+                className="bg-white p-4 rounded-md shadow-md h-[200px] w-[560px] ml-8 hover:bg-blue-200 flex "
               >
                 <div className="flex-none w-52 relative">
                   <img

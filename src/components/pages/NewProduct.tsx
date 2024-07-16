@@ -20,7 +20,7 @@ const NewProduct = () => {
     <div>
       <button
         onClick={control}
-        className="hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group  flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3 h-[200px] w-[570px]"
+        className="hover:border-blue-500 hover:border-solid hover:bg-white hover:text-blue-500 group flex flex-col items-center justify-center rounded-md border-2 border-dashed border-slate-300 text-sm leading-6 text-slate-900 font-medium py-3 h-[500px] w-[350px]"
       >
         <svg
           className="group-hover:text-blue-500 mb-1 text-slate-400"

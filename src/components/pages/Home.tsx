@@ -15,7 +15,7 @@ const Home = () => {
   };
 
   return (
-    <div className=" h-screen bg-slate-300   dark:bg-slate-700 dark:text-black flex flex-col">
+    <div className=" min-h-screen  bg-slate-300   dark:bg-slate-700 dark:text-black flex flex-col">
       <Navbar darkTheme={darkTheme} theme={theme} />
       <div className=" dark:bg-slate-700 dark:text-black vh-%100 flex flex-wrap justify-center">
         <HomeCarts  />

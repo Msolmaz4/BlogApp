@@ -39,7 +39,7 @@ const HomeCarts = () => {
   useEffect(() => {
     const dert = async () => {
       if (data?.data?.length > 7) {
-        const durum = await ter.slice((page - 1) * 8, (page - 1) * 8 + 8);
+        const durum = await ter.slice((page - 1) * 7, (page - 1) * 7 + 7);
         setVeri(durum);
       }
     };
@@ -85,7 +85,7 @@ const HomeCarts = () => {
             .map((item, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-md shadow-md hover:bg-blue-200 flex flex-col"
+                className="bg-white p-4 rounded-md shadow-md hover:bg-blue-200 flex flex-col h-full"
               >
                 <div className="flex-none w-full h-48 relative">
                   <img
@@ -95,16 +95,18 @@ const HomeCarts = () => {
                     loading="lazy"
                   />
                 </div>
-                <div className="mt-4">
-                  <h3 className="text-slate-900 font-semibold text-center">
-                    {item.title}
-                  </h3>
-                  <p className="text-slate-700 text-justify">
-                    {item.content.split(" ").slice(0, 10).join(" ")}....
-                  </p>
-                  <p className="text-slate-400 text-justify">
-                    Published Date: {item.createdAt.slice(0, 10)}
-                  </p>
+                <div className="mt-4 flex flex-col justify-between flex-grow">
+                  <div>
+                    <h3 className="text-slate-900 font-semibold text-center">
+                      {item.title}
+                    </h3>
+                    <p className="text-slate-700 text-justify">
+                      {item.content.split(" ").slice(0, 10).join(" ")}....
+                    </p>
+                    <p className="text-slate-400 text-justify">
+                      Published Date: {item.createdAt.slice(0, 10)}
+                    </p>
+                  </div>
                   <div className="mt-6 gap-2 justify-between flex">
                     <div className="flex gap-4">
                       <Like setVeri={setVeri} item={item} veri={veri} />

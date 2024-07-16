@@ -26,23 +26,19 @@ interface BlogsResponse {
 
 const HomeCarts = () => {
   const { data, isLoading } = useGetAllBlogsQuery("") as BlogsResponse;
-  //console.log(data?.data)
   const ter = data?.data ? [...data.data].reverse() : [];
-  //console.log(ter)
-  const [veri, setVeri] = useState([]);
+  console.log(data)
+  const [veri, setVeri] = useState<Blog[]>([]);
   const [page, SetPage] = useState<number>(1);
-
   const [text, setText] = useState("");
-
   const navigate = useNavigate();
   const authToken = localStorage.getItem("authToken");
   const storedData = localStorage.getItem("userData");
   const userDat = storedData ? JSON.parse(storedData) : null;
-  //console.log(userDat);
 
   useEffect(() => {
     const dert = async () => {
-      if (data?.data?.length > 8) {
+      if (data?.data?.length > 7) {
         const durum = await ter.slice((page - 1) * 8, (page - 1) * 8 + 8);
         setVeri(durum);
       }
@@ -52,7 +48,7 @@ const HomeCarts = () => {
 
   const hanglr = (id: string) => {
     if (!authToken) {
-      toast("du must login");
+      toast("You must login");
     } else {
       navigate(`details/${id}`);
     }
@@ -60,20 +56,19 @@ const HomeCarts = () => {
 
   return (
     <section>
-      <header className="dark:bg-slate-700 dark:text-black space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
+      <header className="dark:bg-slate-700 dark:text-white space-y-4 p-4 sm:px-8 sm:py-6 lg:p-4 xl:px-8 xl:py-6">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-slate-900">
+          <h2 className="font-semibold text-slate-900 dark:text-white">
             {userDat && (
               <div className="dark:text-gray-100">
-                kullanici ismi : {userDat?.firstName}
+                Kullanıcı ismi : {userDat?.firstName}
               </div>
             )}
           </h2>
         </div>
-
         <Search text={text} setText={setText} />
       </header>
-      <div className="grid gap-3 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 p-4">
         {isLoading ? (
           <button type="button" className="bg-indigo-500 ..." disabled>
             <svg
@@ -90,9 +85,9 @@ const HomeCarts = () => {
             .map((item, index) => (
               <div
                 key={index}
-                className="bg-white p-4 rounded-md shadow-md h-[200px] w-[560px] ml-8 hover:bg-blue-200 flex "
+                className="bg-white p-4 rounded-md shadow-md hover:bg-blue-200 flex flex-col"
               >
-                <div className="flex-none w-52 relative">
+                <div className="flex-none w-full h-48 relative">
                   <img
                     src={item.image}
                     alt=""
@@ -100,7 +95,7 @@ const HomeCarts = () => {
                     loading="lazy"
                   />
                 </div>
-                <div className="ml-2">
+                <div className="mt-4">
                   <h3 className="text-slate-900 font-semibold text-center">
                     {item.title}
                   </h3>
@@ -108,7 +103,7 @@ const HomeCarts = () => {
                     {item.content.split(" ").slice(0, 10).join(" ")}....
                   </p>
                   <p className="text-slate-400 text-justify">
-                    Published Date:{item.createdAt.slice(0, 10)}
+                    Published Date: {item.createdAt.slice(0, 10)}
                   </p>
                   <div className="mt-6 gap-2 justify-between flex">
                     <div className="flex gap-4">
@@ -120,7 +115,7 @@ const HomeCarts = () => {
                     </div>
                     <div>
                       <button
-                        className="cta w-36 h-8 mt-[-7px]"
+                        className="cta w-36 h-8"
                         onClick={() => hanglr(item._id)}
                       >
                         <span className="span">Read </span>
@@ -131,14 +126,14 @@ const HomeCarts = () => {
                             viewBox="0 0 66 43"
                             version="1.1"
                             xmlns="http://www.w3.org/2000/svg"
-                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            xmlnsXlink="http://www.w3.org/1999/xlink"
                           >
                             <g
                               id="arrow"
                               stroke="none"
-                              stroke-width="1"
+                              strokeWidth="1"
                               fill="none"
-                              fill-rule="evenodd"
+                              fillRule="evenodd"
                             >
                               <path
                                 className="one"
@@ -167,7 +162,7 @@ const HomeCarts = () => {
         )}
         {!text.length && <NewProduct />}
       </div>
-      <div className="flex justify-center gap-4 text-xl border border-sky-500 rounded-full w-24 h-12 items-center ml-[900px] mt-2  bg-sky-500 text-white">
+      <div className="flex justify-center mt-6">
         <PageNav setPage={SetPage} page={page} />
       </div>
     </section>

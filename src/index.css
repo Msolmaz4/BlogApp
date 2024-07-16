@@ -94,3 +94,14 @@
     }
   }
 
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .h-[200px] {
+    height: 200px;
+  }
+  .w-[560px] {
+    width: 560px;
+  }
